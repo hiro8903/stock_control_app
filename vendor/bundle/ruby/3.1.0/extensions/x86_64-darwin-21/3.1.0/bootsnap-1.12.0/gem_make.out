@@ -1,0 +1,15 @@
+current directory: /Users/arakihiroki/workspace/stock_control_app/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.12.0/ext/bootsnap
+/Users/arakihiroki/.rbenv/versions/3.1.2/bin/ruby -I /Users/arakihiroki/.rbenv/versions/3.1.2/lib/ruby/site_ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/arakihiroki/workspace/stock_control_app/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.12.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20220715-1875-bpru3t sitelibdir\=./.gem.20220715-1875-bpru3t clean
+
+current directory: /Users/arakihiroki/workspace/stock_control_app/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.12.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20220715-1875-bpru3t sitelibdir\=./.gem.20220715-1875-bpru3t
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/arakihiroki/workspace/stock_control_app/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.12.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20220715-1875-bpru3t sitelibdir\=./.gem.20220715-1875-bpru3t install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20220715-1875-bpru3t/bootsnap

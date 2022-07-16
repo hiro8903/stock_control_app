@@ -1,0 +1,15 @@
+current directory: /Users/arakihiroki/workspace/stock_control_app/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+/Users/arakihiroki/.rbenv/versions/3.1.2/bin/ruby -I /Users/arakihiroki/.rbenv/versions/3.1.2/lib/ruby/site_ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/arakihiroki/workspace/stock_control_app/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20220715-1875-8irbut sitelibdir\=./.gem.20220715-1875-8irbut clean
+
+current directory: /Users/arakihiroki/workspace/stock_control_app/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20220715-1875-8irbut sitelibdir\=./.gem.20220715-1875-8irbut
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+
+current directory: /Users/arakihiroki/workspace/stock_control_app/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20220715-1875-8irbut sitelibdir\=./.gem.20220715-1875-8irbut install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20220715-1875-8irbut/skiptrace/internal
