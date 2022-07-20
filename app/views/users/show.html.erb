@@ -1,11 +1,13 @@
 <% provide(:title, @user.name) %>
 
-<h1><%= @user.name %></h1>
+<div class="text-center">
+  <h1><%= @user.name %></h1>
+</div>
 
 <ul>
-  <li><%= link_to "Edit", edit_user_path(@user) %></li>
-  <li><%= link_to "Destroy", user_path(@user), data: {
+  <li><%= link_to "編集", edit_user_path(@user), class: "btn btn-success m-1" %></li>
+  <li><%= link_to "削除", user_path(@user), data: {
                     turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
+                    turbo_confirm: "本当に削除しますか？"
+                  }, class: "btn btn-danger m-1" %></li>
 </ul>

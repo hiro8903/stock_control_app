@@ -1,5 +1,12 @@
 <% provide(:title, "New User") %>
+<% provide(:btn_text, '新規作成') %>
 
-<h1>New User</h1>
+<div class="text-center">
+  <h1>ユーザー登録</h1>
+</div>
 
-<%= render "form", user: @user %>
+<div class="row justify-content-center">
+  <div class="col-5">
+    <%= render "form", user: @user %>
+  </div>
+</div>

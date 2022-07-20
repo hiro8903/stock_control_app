@@ -1,13 +1,15 @@
 <% provide(:title, "Users") %>
 
-<h1>users</h1>
-
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user %>
-    </li>
-  <% end %>
-
-  <%= link_to "new user", new_user_path %>
-</ul>
+<div class="text-center">
+  <h1>ユーザー一覧</h1>
+</div>
+<div>
+  <ul>
+    <% @users.each do |user| %>
+      <li class="m-1">
+        <%= link_to user.name, user %>
+      </li>
+    <% end %>
+    <%= link_to "ユーザー作成", new_user_path, class: "btn btn-primary m-1" %>
+  </ul>
+</div>

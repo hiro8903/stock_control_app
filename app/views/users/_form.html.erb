@@ -1,13 +1,12 @@
 <%= form_with model: user do |form| %>
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-      <% user.errors.full_messages_for(:name).each do |message| %>
+  <% user.errors.full_messages_for(:name).each do |message| %>
     <div><%= message %></div>
   <% end %>
-  </div>
 
-  <div>
-    <%= form.submit %>
+  <%= form.label :name, class: "form-label m-1" %><br>
+  <%= form.text_field :name, class: "form-control my-1" %>
+  
+  <div class="d-grid gap-2">
+    <%= form.submit yield(:btn_text), class: "btn btn-primary" %>
   </div>
 <% end %>
