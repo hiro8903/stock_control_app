@@ -1,7 +1,5 @@
 <%= form_with model: user do |form| %>
-  <% user.errors.full_messages_for(:name).each do |message| %>
-    <div><%= message %></div>
-  <% end %>
+  <%= render 'shared/error_messages' %>
 
   <%= form.label :name, class: "form-label m-1" %><br>
   <%= form.text_field :name, class: "form-control my-1" %>
