@@ -3,6 +3,13 @@
 
   <%= form.label :name, class: "form-label m-1" %><br>
   <%= form.text_field :name, class: "form-control my-1" %>
+
+  <%= form.label :password, class: "form-label m-1" %>
+  <%= form.password_field :password, class: "form-control my-1" %>
+
+  <%= form.label :password_confirmation, class: "form-label m-1" %>
+  <%= form.password_field :password_confirmation, class: "form-control my-1" %>
+
   
   <div class="d-grid gap-2">
     <%= form.submit yield(:btn_text), class: "btn btn-primary" %>
