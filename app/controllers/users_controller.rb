@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      flash[:success] = '新規作成に成功しました。'
       redirect_to @user
     else
       render :new, status: :unprocessable_entity  #フォームを再表示し、Turboが正常に動作するようにステータスコード422 Unprocessable Entityを返します（unprocessable_entity）
@@ -29,6 +30,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     
     if @user.update(user_params)
+      flash[:success] = '更新に成功しました。'
       redirect_to @user
     else
       render :edit, status: :unprocessable_entity
