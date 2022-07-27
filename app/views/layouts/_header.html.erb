@@ -37,10 +37,13 @@
             マスタメンテナンス
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><%= link_to "ユーザー", users_path, class: "dropdown-item" %></li>
             <li><%= link_to "製造元", "#", class: "dropdown-item" %></li>
             <li><%= link_to "購買先", "#", class: "dropdown-item" %></li>
             <li><%= link_to "資材", "#", class: "dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to "ユーザー", users_path, class: "dropdown-item" %></li>
+            <li><%= link_to "部署登録", new_department_path, class: "dropdown-item" %></li>
+            <li><%= link_to "部署一覧", departments_path, class: "dropdown-item" %></li>
           </ul>
         </li>
         <li class="nav-item">

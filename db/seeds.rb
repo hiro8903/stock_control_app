@@ -19,3 +19,12 @@ User.create!(name: "Sample User",
               password: password,
               password_confirmation: password)
 end
+
+# 部署作成
+def create_department(name)
+  Department.create!(name: name)
+end
+
+create_department("営業部")
+create_department("品質管理部")
+create_department("生産管理課")

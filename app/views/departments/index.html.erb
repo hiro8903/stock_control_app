@@ -1,0 +1,15 @@
+<% provide(:title, "部署一覧") %>
+
+<div class="text-center">
+  <h1>部署一覧</h1>
+</div>
+<div>
+  <%= link_to "部署作成", new_department_path, class: "btn btn-primary m-1" %>
+  <ul>
+    <% @departments.each do |department| %>
+      <li class="m-1">
+        <%= link_to department.name, department %>
+      </li>
+    <% end %>
+  </ul>
+</div>

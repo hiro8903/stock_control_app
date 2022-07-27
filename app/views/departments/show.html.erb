@@ -1,0 +1,13 @@
+<% provide(:title, @department.name) %>
+
+<div class="text-center">
+  <h1><%= @department.name %></h1>
+</div>
+
+<ul>
+  <li><%= link_to "編集", edit_department_path(@department), class: "btn btn-success m-1" %></li>
+  <li><%= link_to "削除", department_path(@department), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "本当に削除しますか？"
+                  }, class: "btn btn-danger m-1" %></li>
+</ul>
