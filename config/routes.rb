@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'departments/new'
   root 'sessions#new'
 
   # ログイン機能
