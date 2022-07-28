@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :logged_in_user, only: [:show, :edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :set_departments, only: [:new, :create, :edit, :update]
+  # before_action :logged_in_user, only: [:show, :edit, :update]
+  # before_action :correct_user, only: [:edit, :update]
 
   def index
     @users =User.all
@@ -16,7 +17,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     if @user.save
       flash[:success] = '新規作成に成功しました。'
       redirect_to @user
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   
   private
     def user_params
-      params.require(:user).permit(:name, :password, :password_confirmation)
+      params.require(:user).permit(:name, :department_id, :password, :password_confirmation)
     end
 
     # beforeフィルター
@@ -56,6 +56,10 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    def set_departments
+      @departments = Department.order(:name)
+    end
+    
     # ログイン済みのユーザーか確認します。
     def logged_in_user
       unless logged_in?

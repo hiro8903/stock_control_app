@@ -7,6 +7,7 @@ ja:
         user:
           id: ID
           name: 名前
+          department_id: 部署
           password: パスワード
           password_confirmation: パスワード再入力
           created_at: 作成日
