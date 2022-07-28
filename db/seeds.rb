@@ -28,3 +28,12 @@ end
 create_department("営業部")
 create_department("品質管理部")
 create_department("生産管理課")
+
+# メーカー作成
+def create_manufacturer(name)
+  Manufacturer.create!(name: name)
+end
+
+create_manufacturer("A社")
+create_manufacturer("B社")
+create_manufacturer("C社")

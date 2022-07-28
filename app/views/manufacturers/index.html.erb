@@ -1,2 +1,18 @@
-<h1>Manufacturers#index</h1>
-<p>Find me in app/views/manufacturers/index.html.erb</p>
+<% provide(:title, "メーカー一覧") %>
+
+<div class="text-center">
+  <h1>メーカー一覧</h1>
+</div>
+<div>
+    <h3>メーカー登録数：<%= @manufacturers.present? ? "#{@manufacturers.count}" : "0" %>社</h3>
+  <ul> 
+    <% if @manufacturers.present? %>
+      <% @manufacturers.each do |manufacturer| %>
+        <li class="m-1">
+          <%= link_to manufacturer.name, manufacturer %>
+        </li>
+      <% end %>
+    <% end %>
+    <%= link_to "メーカー作成", new_manufacturer_path, class: "btn btn-primary m-1" %>
+  </ul>
+</div>

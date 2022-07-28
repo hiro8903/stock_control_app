@@ -1,2 +1,15 @@
-<h1>Manufacturers#show</h1>
-<p>Find me in app/views/manufacturers/show.html.erb</p>
+<% provide(:title, @manufacturer.name) %>
+
+<div class="text-center">
+  <h1><%= @manufacturer.name %></h1>
+</div>
+
+<ul>
+  <li><%= link_to "編集", edit_manufacturer_path(@manufacturer), class: "btn btn-success m-1" %></li>
+  <li><%= link_to "削除", manufacturer_path(@manufacturer), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "本当に削除しますか？"
+                  }, class: "btn btn-danger m-1" %></li>
+  <li><%= link_to "一覧に戻る", manufacturers_path, class: "btn btn-secondary m-1" %></li>
+
+</ul>

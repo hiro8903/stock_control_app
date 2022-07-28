@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_27_205303) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_28_135335) do
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_departments_on_name", unique: true
+    t.index ["name"], name: "index_departments_on_name"
+  end
+
+  create_table "manufacturers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_manufacturers_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -25,7 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_205303) do
     t.string "password_digest"
     t.integer "department_id"
     t.index ["department_id"], name: "index_users_on_department_id"
-    t.index ["name"], name: "index_users_on_name", unique: true
   end
 
   add_foreign_key "users", "departments"

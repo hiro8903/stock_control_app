@@ -1,2 +1,12 @@
-<h1>Manufacturers#new</h1>
-<p>Find me in app/views/manufacturers/new.html.erb</p>
+<% provide(:title, "メーカー登録") %>
+<% provide(:btn_text, '新規作成') %>
+
+<div class="text-center">
+  <h1>メーカー登録</h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+    <%= render "form", manufacturer: @manufacturer %>
+  </div>
+</div>
