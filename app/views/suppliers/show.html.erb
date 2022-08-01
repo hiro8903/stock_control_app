@@ -1,0 +1,15 @@
+<% provide(:title, @supplier.name) %>
+
+<div class="text-center">
+  <h1><%= @supplier.name %></h1>
+</div>
+
+<ul>
+  <li><%= link_to "編集", edit_supplier_path(@supplier), class: "btn btn-success m-1" %></li>
+  <li><%= link_to "削除", supplier_path(@supplier), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "本当に削除しますか？"
+                  }, class: "btn btn-danger m-1" %></li>
+  <li><%= link_to "一覧に戻る", suppliers_path, class: "btn btn-secondary m-1" %></li>
+
+</ul>

@@ -1,0 +1,18 @@
+<% provide(:title, "仕入先一覧") %>
+
+<div class="text-center">
+  <h1>仕入先一覧</h1>
+</div>
+<div>
+    <h3>仕入先登録数：<%= @suppliers.present? ? "#{@suppliers.count}" : "0" %>社</h3>
+  <ul> 
+    <% if @suppliers.present? %>
+      <% @suppliers.each do |suppliers| %>
+        <li class="m-1">
+          <%= link_to suppliers.name, suppliers %>
+        </li>
+      <% end %>
+    <% end %>
+    <%= link_to "仕入先登録", new_supplier_path, class: "btn btn-primary m-1" %>
+  </ul>
+</div>

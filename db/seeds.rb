@@ -34,6 +34,15 @@ def create_manufacturer(name)
   Manufacturer.create!(name: name)
 end
 
-create_manufacturer("A社")
-create_manufacturer("B社")
-create_manufacturer("C社")
+create_manufacturer("メーカーA")
+create_manufacturer("メーカーB")
+create_manufacturer("メーカーC")
+
+# 仕入先作成
+def create_supplier(name)
+  Supplier.create!(name: name)
+end
+
+create_supplier("商社A")
+create_supplier("商社B")
+create_supplier("商社C")

@@ -1,0 +1,10 @@
+<%= form_with model: supplier do |form| %>
+ <%= render 'shared/error_messages_of_suppliers' %> 
+
+  <%= form.label :name, class: "form-label m-1" %><br>
+  <%= form.text_field :name, class: "form-control my-1" %>
+
+  <div class="d-grid gap-2">
+    <%= form.submit yield(:btn_text), class: "btn btn-primary" %>
+  </div>
+<% end %>
