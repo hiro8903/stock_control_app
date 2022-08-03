@@ -1,2 +1,12 @@
-<h1>Paints#edit</h1>
-<p>Find me in app/views/paints/edit.html.erb</p>
+<% provide(:title, "塗料情報更新") %>
+<% provide(:btn_text, '更新') %>
+
+<div class="text-center">
+  <h1>塗料情報の更新</h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+    <%= render "form", paint: @paint %>
+  </div>
+</div>

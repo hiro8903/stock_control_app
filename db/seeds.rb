@@ -46,3 +46,23 @@ end
 create_supplier("商社A")
 create_supplier("商社B")
 create_supplier("商社C")
+
+# 塗料作成
+def create_paint(name,
+                manufacturer_id,
+                unit_price,
+                ordering_point,
+                main_ingredient,
+                warranty)
+  Paint.create!(name: name,
+              manufacturer_id: manufacturer_id,
+              unit_price: unit_price,
+              ordering_point: ordering_point,
+              main_ingredient: main_ingredient,
+              warranty: warranty)
+end
+
+create_paint("塗料A","1","1000","100","PTFE","30")
+create_paint("塗料B","2","1500","50","PFA","365")
+create_paint("塗料C","3","2000","150","ETFE","180")
+

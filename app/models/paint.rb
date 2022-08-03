@@ -1,4 +1,4 @@
-class Manufacturer < ApplicationRecord
-  has_many :paints, dependent: :destroy
+class Paint < ApplicationRecord
+  belongs_to :manufacturer
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
 end

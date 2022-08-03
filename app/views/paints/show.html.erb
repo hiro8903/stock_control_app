@@ -1,2 +1,45 @@
-<h1>Paints#show</h1>
-<p>Find me in app/views/paints/show.html.erb</p>
+<% provide(:title, @paint.name) %>
+
+<div class="text-center">
+  <h1>塗料情報</h1>
+</div>
+
+<div class="row justify-content-center text-center">
+  <div class="col-4">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td scope="row"><%= Paint.human_attribute_name("name") %></td>
+          <td><%= @paint.name %></td>
+        </tr>
+        <tr>
+          <td scope="row"><%= Paint.human_attribute_name("unit_price") %></td>
+          <td><%= @paint.unit_price %></td>
+        </tr>
+        <tr>
+          <td scope="row"><%= Paint.human_attribute_name("ordering_point") %></td>
+          <td><%= @paint.ordering_point %></td>
+        </tr>
+        <tr>
+          <td scope="row"><%= Paint.human_attribute_name("main_ingredient") %></td>
+          <td><%= @paint.main_ingredient %></td>
+        </tr>
+        <tr>
+          <td scope="row"><%= Paint.human_attribute_name("warranty") %></td>
+          <td><%= @paint.warranty %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<ul>
+  <li><%= link_to "編集", edit_paint_path(@paint), class: "btn btn-success m-1" %></li>
+  <li><%= link_to "削除", paint_path(@paint), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "本当に削除しますか？"
+                  }, class: "btn btn-danger m-1" %></li>
+  <li><%= link_to "一覧に戻る", paints_path, class: "btn btn-secondary m-1" %></li>
+
+</ul>

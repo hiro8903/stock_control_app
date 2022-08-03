@@ -1,2 +1,50 @@
-<h1>Paints#index</h1>
-<p>Find me in app/views/paints/index.html.erb</p>
+<% provide(:title, "塗料一覧") %>
+
+<div class="text-center">
+  <h1>塗料一覧</h1>
+</div>
+<div>
+  <h3>塗料登録数：<%= @paints.present? ? "#{@paints.count}" : "0" %>件</h3>
+  <%= link_to "塗料登録", new_paint_path, class: "btn btn-primary m-1" %>
+
+    <% if @paints.present? %>
+      <div class="row justify-content-center text-center">
+        <div class="col-8">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"><%= Paint.human_attribute_name("name") %></th>
+                <th scope="col"><%= Paint.human_attribute_name("unit_price") %></th>
+                <th scope="col"><%= Paint.human_attribute_name("ordering_point") %></th>
+                <th scope="col"><%= Paint.human_attribute_name("main_ingredient") %></th>
+                <th scope="col"><%= Paint.human_attribute_name("warranty") %></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+      <% @paints.each do |paint| %>
+              <tr class="align-middle">
+                <td><%= link_to paint.name, paint %></td>
+                <td><%= paint.unit_price %></td>
+                <td><%= paint.ordering_point %></td>
+                <td><%= paint.main_ingredient %></td>
+                <td><%= paint.warranty %></td>
+                <td><%= link_to "編集", edit_paint_path(paint), class: "btn btn-sm btn-success" %></td>
+                <td><%= link_to "削除", paint_path(paint), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "本当に削除しますか？"
+                  }, class: "btn btn-sm btn-danger" %></td>
+              </tr>
+      <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+
+</div>
+
+
+
+
