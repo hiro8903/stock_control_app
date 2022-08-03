@@ -3,7 +3,7 @@ class PaintsController < ApplicationController
   before_action :set_manufacturers, only: [:new, :create, :edit, :update]
 
   def index
-    @paints = Paint.order(:name)
+    @paints = Paint.order(:discontinue).order(:name)
   end
 
   def show
@@ -44,7 +44,7 @@ class PaintsController < ApplicationController
 
   private
     def paint_params
-      params.require(:paint).permit(:name, :manufacturer_id, :unit_price, :ordering_point, :main_ingredient, :warranty)
+      params.require(:paint).permit(:name, :manufacturer_id, :unit_price, :ordering_point, :main_ingredient, :warranty, :discontinue)
     end
 
     # beforeフィルター

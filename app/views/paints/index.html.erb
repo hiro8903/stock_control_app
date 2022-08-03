@@ -4,9 +4,9 @@
   <h1>塗料一覧</h1>
 </div>
 <div>
-  <h3>塗料登録数：<%= @paints.present? ? "#{@paints.count}" : "0" %>件</h3>
+  <h3>塗料登録数：<%= @paints.present? ? "#{@paints.where(discontinue: false).count}" : "0" %>件（現行品）</h3>
+  <h6 class="text-danger"><%= "＊廃盤塗料は赤色(#{@paints.where(discontinue: true).count}件)" %></h6>
   <%= link_to "塗料登録", new_paint_path, class: "btn btn-primary m-1" %>
-
     <% if @paints.present? %>
       <div class="row justify-content-center text-center">
         <div class="col-8">
@@ -23,20 +23,35 @@
               </tr>
             </thead>
             <tbody>
-      <% @paints.each do |paint| %>
-              <tr class="align-middle">
-                <td><%= link_to paint.name, paint %></td>
-                <td><%= paint.unit_price %></td>
-                <td><%= paint.ordering_point %></td>
-                <td><%= paint.main_ingredient %></td>
-                <td><%= paint.warranty %></td>
-                <td><%= link_to "編集", edit_paint_path(paint), class: "btn btn-sm btn-success" %></td>
-                <td><%= link_to "削除", paint_path(paint), data: {
+            <% @paints.each do |paint| %>
+              <% if paint.discontinue%>
+                <tr class="align-middle text-danger">
+                  <td><%= link_to paint.name, paint, class: "link-danger" %></td>
+                  <td><%= paint.unit_price %></td>
+                  <td><%= paint.ordering_point %></td>
+                  <td><%= paint.main_ingredient %></td>
+                  <td><%= paint.warranty %></td>
+                  <td><%= link_to "編集", edit_paint_path(paint), class: "btn btn-sm btn-success" %></td>
+                  <td><%= link_to "削除", paint_path(paint), data: {
                     turbo_method: :delete,
-                    turbo_confirm: "本当に削除しますか？"
-                  }, class: "btn btn-sm btn-danger" %></td>
-              </tr>
-      <% end %>
+                      turbo_confirm: "本当に削除しますか？"
+                    }, class: "btn btn-sm btn-danger" %></td>
+                </tr>
+              <% else %>
+                <tr class="align-middle">
+                  <td><%= link_to paint.name, paint %></td>
+                  <td><%= paint.unit_price %></td>
+                  <td><%= paint.ordering_point %></td>
+                  <td><%= paint.main_ingredient %></td>
+                  <td><%= paint.warranty %></td>
+                  <td><%= link_to "編集", edit_paint_path(paint), class: "btn btn-sm btn-success" %></td>
+                  <td><%= link_to "削除", paint_path(paint), data: {
+                    turbo_method: :delete,
+                      turbo_confirm: "本当に削除しますか？"
+                    }, class: "btn btn-sm btn-danger" %></td>
+                </tr>
+              <% end %>
+            <% end %>
             </tbody>
           </table>
         </div>
