@@ -23,6 +23,8 @@
   <%= form.label :warranty, class: "form-label m-1" %><br>
   <%= form.number_field :warranty, min: "1", class: 'form-control my-1' %>
 
+  <%= form.label :discontinue, class: "form-check-label m-1" %><br>
+  <%= form.check_box :discontinue, class: 'form-check-input my-1 p-3' %>
 
   <div class="d-grid gap-2">
     <%= form.submit yield(:btn_text), class: "btn btn-primary mt-1" %>
