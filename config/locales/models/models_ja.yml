@@ -36,6 +36,7 @@ ja:
           discontinue: 廃盤
         order:
           id: ID
+          paint: 塗料
           user: 発注者
           order_on: 発注日
           quantity: 発注量[kg]

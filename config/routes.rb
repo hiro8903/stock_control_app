@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :manufacturers
   resources :suppliers
   resources :paints
+  resources :orders
 end

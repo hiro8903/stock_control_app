@@ -6,10 +6,10 @@
 
   <%= form.label :department_id, class: "form-label m-1" %>
   <% if @user.department_id.present? %>
-        <%= form.collection_select :department_id, @departments, :id, :name, { include_blank: "選択してください", selected: @user.department_id }, class: 'form-control my-1'%>
-      <% else %>
-        <%= form.collection_select :department_id, @departments, :id, :name, { include_blank: "選択してください", selected:"" }, class: 'form-control my-1'%>
-      <% end %>
+    <%= form.collection_select :department_id, @departments, :id, :name, { include_blank: "選択してください", selected: @user.department_id }, class: 'form-control my-1'%>
+  <% else %>
+    <%= form.collection_select :department_id, @departments, :id, :name, { include_blank: "選択してください", selected:"" }, class: 'form-control my-1'%>
+  <% end %>
 
   <%= form.label :password, class: "form-label m-1" %>
   <%= form.password_field :password, class: "form-control my-1" %>
