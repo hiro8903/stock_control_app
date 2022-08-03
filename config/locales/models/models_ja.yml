@@ -6,6 +6,7 @@ ja:
       manufacturer: メーカー
       supplier: 仕入先
       paint: 塗料
+      order: 発注
     attributes:
         user:
           id: ID
@@ -32,3 +33,10 @@ ja:
           ordering_point: 発注点[kg]
           main_ingredient: 主成分
           warranty: 品質保証期間[日]
+        order:
+          id: ID
+          user: 発注者
+          order_on: 発注日
+          quantity: 発注量[kg]
+          desired_on: 納入希望日
+          note: 備考

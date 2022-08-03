@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_02_114302) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_03_060830) do
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -23,6 +23,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_02_114302) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_manufacturers_on_name", unique: true
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "paint_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "order_on", null: false
+    t.float "quantity", null: false
+    t.datetime "desired_on"
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paint_id"], name: "index_orders_on_paint_id", unique: true
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "paints", force: :cascade do |t|
@@ -54,6 +67,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_02_114302) do
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 
+  add_foreign_key "orders", "paints"
+  add_foreign_key "orders", "users"
   add_foreign_key "paints", "manufacturers"
   add_foreign_key "users", "departments"
 end
