@@ -42,4 +42,9 @@ ja:
           quantity: 発注量[kg]
           desired_on: 納入希望日
           note: 備考
-
+          registerer: 登録者
+          editor: 編集者
+          created_at: 登録日時
+          updated_at: 更新日時
+          unit_price: 単価[円/kg]
+          total_price: 合計金額[円]

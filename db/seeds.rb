@@ -66,3 +66,32 @@ create_paint("塗料A","1","1000","100","PTFE","30")
 create_paint("塗料B","2","1500","50","PFA","365")
 create_paint("塗料C","3","2000","150","ETFE","180")
 
+# 発注作成
+def create_order(paint_id,
+                user_id,
+                order_on,
+                quantity,
+                desired_on,
+                note,
+                registerer_id,
+                editor_id,
+                unit_price,
+                total_price)
+  Order.create!(paint_id: paint_id,
+                user_id: user_id,
+                order_on: order_on,
+                quantity: quantity,
+                desired_on: desired_on,
+                note: note,
+                registerer_id: registerer_id,
+                editor_id: editor_id,
+                unit_price: unit_price,
+                total_price: total_price)
+end
+
+userA = User.find(1)
+userB = User.find(2)
+paintA = Paint.find(1)
+paintB = Paint.find(2)
+create_order(paintA.id, userA.id, Date.today, 50, Date.today.next_month, "びこう", userA.id, userA.id, paintA.unit_price, paintA.unit_price * 50)
+create_order(paintB.id, userB.id, Date.today, 100, Date.today.next_month, "びこう", userB.id, userB.id, paintB.unit_price, paintB.unit_price * 100)

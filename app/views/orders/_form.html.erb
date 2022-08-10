@@ -1,31 +1,54 @@
-<%= form_with model: order do |form| %>
+<%= form_with model: order, local: false do |form| %>
  <%= render 'shared/error_messages_of_orders' %> 
 
   <%= form.label :user, class: "form-label m-1" %>
+
   <% if @order.user_id.present? %>
     <%= form.collection_select :user_id, @users, :id, :name, { selected: @order.user_id }, class: 'form-control my-1'%>
   <% else %>
     <%= form.collection_select :user_id, @users, :id, :name, { selected: current_user.id }, class: 'form-control my-1'%>
-  <% end %>
+  <% end %> 
 
   <%= form.label :order_on, class: "form-label m-1" %>
-  <%= form.date_field :order_on, value: Date.today, class: 'form-control my-1'%>
+  <% if @order.present? && @order.order_on.present? %>
+    <%= form.date_field :order_on, value: @order.order_on.to_date, class: 'form-control my-1'%>
+  <% elsif @last_order.present? && @last_order.order_on %>
+    <%= form.date_field :order_on, value: @last_order.order_on.to_date, class: 'form-control my-1'%>
+  <% else %>
+    <%= form.date_field :order_on, value: Date.today, class: 'form-control my-1'%>
+  <% end %>
 
   <%= form.label :paint, class: "form-label m-1" %>
-  <% if @order.paint_id.present? %>
-    <%= form.collection_select :paint_id, @paints, :id, :name, { selected: @order.paint_id }, class: 'form-control my-1'%>
+  <% if @order.present? && @order.paint_id.present? %>
+    <%= form.collection_select :paint_id, @paints, :id, :name, { selected: @order.paint_id }, class: 'form-control my-1' %>
   <% else %>
-    <%= form.collection_select :paint_id, @paints, :id, :name, {  include_blank: "選択してください" }, class: 'form-control my-1'%>
+    <%= form.collection_select :paint_id, @paints, :id, :name, {  include_blank: "選択してください" }, class: 'form-control my-1' %>
   <% end %>
 
   <%= form.label :quantity, class: "form-label m-1" %><br>
   <%= form.number_field :quantity, min: "0", step: "0.001", class: "form-control my-1" %>
 
   <%= form.label :desired_on, class: "form-label m-1" %>
+  <% if @order.present? && @order.desired_on.present? %>
+  <%= form.date_field :desired_on, value: @order.desired_on.to_date, class: 'form-control my-1'%>
+  <% elsif @last_order.present? && @last_order.desired_on %>
+  <%= form.date_field :desired_on, value: @last_order.desired_on.to_date, class: 'form-control my-1'%>
+  <% else %>
   <%= form.date_field :desired_on, value: Date.today.next_month, class: 'form-control my-1'%>
+  <% end %>
 
   <%= form.label :note, class: "form-label m-1" %>
   <%= form.text_field :note, class: 'form-control my-1'%>
+
+  <%= form.label :unit_price, class: "form-label m-1" %><br>
+  <% if @order.present? && @order.unit_price.present? %>
+    <%= form.number_field :unit_price, min: "0", step: "0.001", value: @order.unit_price,class: 'form-control my-1' %>
+  <% else %>
+    <%= form.number_field :unit_price, min: "0", step: "0.001", class: 'form-control my-1' %>
+  <% end %>
+
+  <%= form.hidden_field :registerer_id, value: current_user.id if order.created_at == order.updated_at %>
+  <%= form.hidden_field :editor_id, value: current_user.id %>
 
   <div class="d-grid gap-2">
     <%= form.submit yield(:btn_text), class: "btn btn-primary" %>

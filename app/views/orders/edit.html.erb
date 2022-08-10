@@ -1,2 +1,12 @@
-<h1>Orders#edit</h1>
-<p>Find me in app/views/orders/edit.html.erb</p>
+<% provide(:title, "発注情報編集") %>
+<% provide(:btn_text, '更新') %>
+
+<div class="text-center">
+  <h1>発注情報の更新</h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+    <%= render "form", order: @order %>
+  </div>
+</div>
