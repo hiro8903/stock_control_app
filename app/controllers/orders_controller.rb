@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
       end
       @order.save
       flash[:success] = '更新に成功しました。'
+      
       redirect_to orders_path
     else
       # @users,@paintsが設定されていないと保存失敗時にrenderした際、それぞれがnilになりエラーになる。

@@ -39,7 +39,7 @@
         </tr>
         <tr>
           <td scope="row"><%= Order.human_attribute_name("total_price") %></td>
-          <td><%# @order.total_price.present? ? @order.total_price : "-" %></td>
+          <td><%= @order.total_price.present? ? @order.total_price : "-" %></td>
         </tr>
       </tbody>
       <tfoot>
@@ -53,11 +53,11 @@
         </tr>
         <tr>
           <td scope="row"><%= Order.human_attribute_name("editor") %></td>
-          <td><%= @order.created_at != @order.updated_at ? @order.editor.name : "-" %></td>
+          <td><%= @order.created_at.strftime("%Y%m%d%k%M") == @order.updated_at.strftime("%Y%m%d%k%M") ? "-" : @order.editor.name%></td>
         </tr>
         <tr>
           <td scope="row"><%= Order.human_attribute_name("updated_at") %></td>
-          <td><%= @order.created_at != @order.updated_at ? @order.updated_at.strftime("%Y / %m / %d %k:%M") : "-" %></td>
+          <td><%= @order.created_at.strftime("%Y%m%d%k%M") == @order.updated_at.strftime("%Y%m%d%k%M") ? "-" : @order.updated_at.strftime("%Y / %m / %d %k:%M") %></td>
         </tr>
       </tfoot>
     </table>

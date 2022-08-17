@@ -11,8 +11,8 @@
           <table class="table">
             <thead>
               <tr>
+              <th></th>
                 <th scope="col"><%= Order.human_attribute_name("paint") %></th>
-
                 <th scope="col"><%= Order.human_attribute_name("order_on") %></th>
                 <th scope="col"><%= Order.human_attribute_name("desired_on") %></th>
                 <th scope="col"><%= Order.human_attribute_name("quantity") %></th>
@@ -26,8 +26,14 @@
             <tbody>
             <% @orders.each do |order| %>
                 <tr class="align-middle">
+                  <td>
+                    <% if flash.present? && @orders.order(updated_at: :desc).first == order %>
+                    <div class="alert-success d-flex align-items-center">
+                      <svg width="24" height="24"><use xlink:href="#check-circle-fill"/></svg>
+                    </div>
+                    <% end %>
+                  </td>
                   <td><%= link_to order.paint.name, order %></td>
-
                   <td><%= order.order_on.strftime("%Y / %m / %d") if order.order_on.present? %></td>
                   <td><%= order.desired_on.present? ? order.desired_on.strftime("%Y / %m / %d") : '成行'  %></td>
                   <td><%= order.quantity %></td>
@@ -47,7 +53,3 @@
       </div>
     <% end %>
 </div>
-
-
-
-
