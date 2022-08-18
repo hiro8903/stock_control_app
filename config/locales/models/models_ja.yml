@@ -7,6 +7,7 @@ ja:
       supplier: 仕入先
       paint: 塗料
       order: 発注
+      answer: 回答
     attributes:
         user:
           id: ID
@@ -48,3 +49,9 @@ ja:
           updated_at: 更新日時
           unit_price: 単価[円/kg]
           total_price: 合計金額[円]
+        answer:
+          id: ID
+          order: 発注情報
+          scheduled_at: 納入予定
+          quantity: 納入量[kg]
+          note: 備考

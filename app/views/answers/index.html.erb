@@ -1,2 +1,42 @@
-<h1>Answers#index</h1>
-<p>Find me in app/views/answers/index.html.erb</p>
+<% provide(:title, "回答一覧") %>
+
+<div class="text-center">
+  <h1>回答一覧</h1>
+</div>
+<div>
+    <% if @answers.present? %>
+      <div class="row justify-content-center text-center">
+        <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"><%= Answer.human_attribute_name("order.paint") %></th>
+                <th scope="col"><%= Answer.human_attribute_name("scheduled_at") %></th>
+                <th scope="col"><%= Answer.human_attribute_name("quantity") %></th>
+                <th scope="col">残量[kg]</th>
+                <th scope="col"><%= Answer.human_attribute_name("note") %></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @answers.each do |answer| %>
+                <tr class="align-middle">
+                  <td><%= link_to answer.order.paint.name, answer %></td>
+                  <td><%= answer.scheduled_at.strftime("%Y / %m / %d") %></td>
+                  <td><%= answer.quantity %></td>
+                  <td><%= residual(answer) %></td>
+                  <td><%= answer.note %></td>
+                  <td><%= link_to "編集", edit_answer_path(answer), class: "btn btn-sm btn-success" %></td>
+                  <td><%= link_to "削除", answer_path(answer), data: {
+                    turbo_method: :delete,
+                      turbo_confirm: "本当に削除しますか？"
+                    }, class: "btn btn-sm btn-danger" %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+</div>

@@ -7,7 +7,7 @@
   <%= link_to "発注登録", new_order_path, class: "btn btn-primary m-1" %>
     <% if @orders.present? %>
       <div class="row justify-content-center text-center">
-        <div class="col-8">
+        <div class="col-12">
           <table class="table">
             <thead>
               <tr>
@@ -21,6 +21,7 @@
                 <th scope="col"><%= Order.human_attribute_name("total_price") %></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col">回答登録</th>
               </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@
                     turbo_method: :delete,
                       turbo_confirm: "本当に削除しますか？"
                     }, class: "btn btn-sm btn-danger" %></td>
+                  <td><%= link_to "回答", new_order_answer_path(order), class: "btn btn-sm btn-primary" %></td>
                 </tr>
             <% end %>
             </tbody>
