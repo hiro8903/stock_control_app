@@ -1,0 +1,18 @@
+<%= form_with model: answer, url: new_order_answer_path do |form| %>
+  <%= form.label "塗料", class: "form-label m-1" %>
+  <%= form.collection_select :order, @paints, :id, :name, { selected: @order.paint.id }, disabled: true, class: 'form-control my-1'%>
+
+  <%= form.label :quantity, class: "form-label m-1" %><br>
+  <%= form.number_field :quantity, min: "0", step: "0.001", value: residual(answer), class: "form-control my-1" %>
+
+  <%= form.label :scheduled_at, class: "form-label m-1" %>
+  <% if answer.present? && answer.scheduled_at.present? %>
+    <%= form.date_field :scheduled_at, value: answer.scheduled_at.to_date, class: 'form-control my-1'%>
+  <% else %>
+    <%= form.date_field :scheduled_at, value: answer.order.desired_on.to_date, class: 'form-control my-1'%>
+  <% end %>
+
+  <div class="d-grid gap-2">
+    <%= form.submit yield(:btn_text), class: "btn btn-primary" %>
+  </div>
+<% end %>

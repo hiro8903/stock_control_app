@@ -1,2 +1,20 @@
-<h1>Answers#new</h1>
-<p>Find me in app/views/answers/new.html.erb</p>
+<% provide(:title, "回答登録") %>
+<% provide(:btn_text, '新規登録') %>
+
+<div class="text-center">
+  <h1>回答登録</h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-2">
+    <h3>発注情報</h3>
+    <p><%= "#{Order.human_attribute_name("order_on")} : #{@order.order_on.strftime("%Y / %m / %d")}" %></p>
+    <p><%= "#{Order.human_attribute_name("paint")} : #{@order.paint.name}" %></p>
+    <p><%= "#{Order.human_attribute_name("quantity")} : #{@order.quantity}" %></p>
+    <p><%= "#{Order.human_attribute_name("desired_on")} : #{@order.desired_on.strftime("%Y / %m / %d")}" %></p>
+    <p><%= "#{Order.human_attribute_name("note")} : #{@order.note.present? ? @order.note : "-"}" %></p>
+  </div>
+  <div class="col-5">
+    <%= render "form", answer: @answer %>
+  </div>
+</div>
