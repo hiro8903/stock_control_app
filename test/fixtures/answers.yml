@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order: one
+  scheduled_at: 2022-08-18 21:32:44
+  quantity: 1.5
+  note: MyString
+
+two:
+  order: two
+  scheduled_at: 2022-08-18 21:32:44
+  quantity: 1.5
+  note: MyString

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_09_163828) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_18_123244) do
+  create_table "answers", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.datetime "scheduled_at"
+    t.float "quantity"
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_answers_on_order_id"
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -74,6 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_09_163828) do
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 
+  add_foreign_key "answers", "orders"
   add_foreign_key "orders", "paints"
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "users", column: "editor_id"
