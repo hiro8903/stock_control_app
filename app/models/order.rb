@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :registerer, class_name: "User", foreign_key: "registerer_id"
   belongs_to :editor, class_name: "User", foreign_key: "editor_id"
-  has_many :answer, class_name: "answer", foreign_key: "answer_id"
+  has_many :answers, dependent: :destroy
   with_options presence: true do
     validates :paint_id
     validates :user_id
