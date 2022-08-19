@@ -16,6 +16,9 @@
                 <th scope="col"><%= Order.human_attribute_name("order_on") %></th>
                 <th scope="col"><%= Order.human_attribute_name("desired_on") %></th>
                 <th scope="col"><%= Order.human_attribute_name("quantity") %></th>
+                <th scope="col"><%= Answer.human_attribute_name("scheduled_at") %></th>
+                <th scope="col"><%= Answer.human_attribute_name("quantity") %></th>
+                <th scope="col">Oder.answers.count</th>
                 <th scope="col"><%= Order.human_attribute_name("note") %></th>
                 <th scope="col"><%= Order.human_attribute_name("unit_price") %></th>
                 <th scope="col"><%= Order.human_attribute_name("total_price") %></th>
@@ -28,7 +31,7 @@
             <% @orders.each do |order| %>
                 <tr class="align-middle">
                   <td>
-                    <% if flash.present? && @orders.order(updated_at: :desc).first == order %>
+                    <% if (flash.present? && flash[:success] == '発注登録しました。' && @orders.last == order) || (order.answers.present? && flash.present? && flash[:success] == '回答登録しました。' && Answer.all.order(updated_at: :desc).first) == order.answers.last %>
                     <div class="alert-success d-flex align-items-center">
                       <svg width="24" height="24"><use xlink:href="#check-circle-fill"/></svg>
                     </div>
@@ -38,6 +41,9 @@
                   <td><%= order.order_on.strftime("%Y / %m / %d") if order.order_on.present? %></td>
                   <td><%= order.desired_on.present? ? order.desired_on.strftime("%Y / %m / %d") : '成行'  %></td>
                   <td><%= order.quantity %></td>
+                  <td><%= order.answers.present? ? order.answers.first.scheduled_at.strftime("%Y / %m / %d") : '-'  %></td>
+                  <td><%= order.answers.present? ? order.answers.first.quantity : '-'  %></td>
+                  <td><%= order.answers.count %></td>
                   <td><%= order.note.present? ? order.note : '-'  %></td>
                   <td><%= order.unit_price.present? ? order.unit_price : '-'  %></td>
                   <td><%= order.total_price.present? ? order.total_price : '-'  %></td>

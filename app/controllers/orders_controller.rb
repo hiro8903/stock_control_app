@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @orders = Order.all
     if @order.save
       if @order.unit_price.present?
         @order.total_price = @order.unit_price * @order.quantity
@@ -26,7 +27,7 @@ class OrdersController < ApplicationController
         @order.total_price = @order.unit_price * @order.quantity
       end
       @order.save
-      flash[:success] = '更新に成功しました。'
+      flash[:success] = '発注登録しました。'
       
       redirect_to orders_path
     else
