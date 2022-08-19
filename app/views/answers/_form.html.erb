@@ -1,4 +1,4 @@
-<%= form_with model: answer, url: new_order_answer_path do |form| %>
+<%= form_with model: answer, url: order_answers_path(order) do |form| %>
   <%= form.label "塗料", class: "form-label m-1" %>
   <%= form.collection_select :order, @paints, :id, :name, { selected: @order.paint.id }, disabled: true, class: 'form-control my-1'%>
 
