@@ -52,6 +52,6 @@ ja:
         answer:
           id: ID
           order: 発注情報
-          scheduled_at: 納入予定
+          scheduled_at: 納入予定日
           quantity: 納入量[kg]
           note: 備考
