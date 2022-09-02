@@ -1,6 +1,8 @@
 class AnswersController < ApplicationController
   def index
-    @answers = Answer.all
+    # 1つの発注に対する納期回答を全てを取得。
+    # @order = Order.find(params[:order_id])
+    @answers = Answer.all.order(scheduled_at: :ASC)
   end
 
   def show
