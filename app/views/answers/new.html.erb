@@ -13,7 +13,7 @@
     <p><%= "#{Order.human_attribute_name("order_on")} : #{@order.order_on.strftime("%Y / %m / %d")}" %></p>
     <p class="fw-bold"><%= "#{Order.human_attribute_name("paint")} : #{@order.paint.name}" %></p>
     <p><%= "#{Order.human_attribute_name("quantity")} : #{@order.quantity}" %></p>
-    <p class="fw-bold"><%= "残量[kg] : #{residual(@answer)}" %></p>
+    <p class="fw-bold"><%= "残量[kg] : #{answers_helper_residual(@answer)}" %></p>
     <p class="fw-bold"><%= "#{Order.human_attribute_name("desired_on")} : #{@order.desired_on.strftime("%Y / %m / %d")}" %></p>
     <p><%= "#{Order.human_attribute_name("note")} : #{@order.note.present? ? @order.note : "-"}" %></p>
   </div>

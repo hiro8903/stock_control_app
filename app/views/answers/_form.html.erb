@@ -3,7 +3,7 @@
   <%= form.collection_select :order, @paints, :id, :name, { selected: @order.paint.id }, disabled: true, class: 'form-control my-1'%>
 
   <%= form.label :quantity, class: "form-label m-1" %><br>
-  <%= form.number_field :quantity, min: "0.001", max: residual(answer).to_f, step: "0.001", value: residual(answer), class: "form-control my-1" %>
+  <%= form.number_field :quantity, min: "0.001", max: answers_helper_residual(answer).to_f, step: "0.001", value: answers_helper_residual(answer), class: "form-control my-1" %>
 
   <%= form.label :scheduled_at, class: "form-label m-1" %>
   <% if answer.present? && answer.scheduled_at.present? %>
