@@ -32,3 +32,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		console.log(paint_id);
 	}, false);
 }, false);
+
+// tablesorterの導入　ソートの実行
+$(document).ready(function() {
+  $('#fav-table').tablesorter();
+});
