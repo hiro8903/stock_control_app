@@ -1,26 +1,59 @@
 <% provide(:title, "回答一覧") %>
 
-<div class="text-center">
-  <h1>回答一覧</h1>
+<div class="text-center my-3">
+  <h1><%= answer_title(@order) %></h1>
 </div>
-<div>
-    <% if @answers.present? %>
-      <div class="row justify-content-center text-center">
-        <div class="col-12">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>発注ID</th>
-                <th scope="col"><%= Answer.human_attribute_name("order.paint") %></th>
-                <th scope="col"><%= Answer.human_attribute_name("scheduled_at") %></th>
-                <th scope="col"><%= Answer.human_attribute_name("quantity") %></th>
-                <th scope="col">残量[kg]</th>
-                <th scope="col"><%= Answer.human_attribute_name("note") %></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
+<div class="row justify-content-center text-center">
+  <div class="col-12">
+      <% if @order.present? %>
+        <h3>発注情報</h3>
+        <td><%= link_to "編集", edit_order_path(@order), class: "btn btn-sm btn-success" %></td>
+        <td><%= link_to "削除", order_path(@order), data: {turbo_method: :delete,
+                                                          turbo_confirm: "本当に削除しますか？"
+                                                        }, class: "btn btn-sm btn-danger" %></td>
+        <table class="table my-3">
+          <thead>
+            <tr>
+              <th scope="col"><%= Order.human_attribute_name("paint") %></th>
+              <th scope="col"><%= Order.human_attribute_name("order_on") %></th>
+              <th scope="col"><%= Order.human_attribute_name("desired_on") %></th>
+              <th scope="col"><%= Order.human_attribute_name("quantity") %></th>
+              <th scope="col"><%= Order.human_attribute_name("note") %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @order.paint.name %></td>
+              <td><%= @order.order_on.strftime("%Y / %m / %d") %></td>
+              <td><%= @order.desired_on.strftime("%Y / %m / %d") %></td>
+              <td><%= @order.quantity %></td>
+              <td><%= @order.note %></td>
+            </tr>
+          </tbody>
+        <table>
+        <h3>回答一覧</h3>
+        <% if orders_helper_residual(@order).to_i != 0 %>
+          <td><%= link_to "新規回答登録", new_order_answer_path(@order), class: "btn btn-sm btn-primary" %></td>
+        <% else %>
+          <td><%= link_to "新規回答できません", new_order_answer_path(@order), class: "btn btn-sm btn-primary disabled" %></td>
+        <% end %>
+      <% end %>
+
+      <% if @answers.present? %>
+        <table class="table my-3">
+          <thead>
+            <tr>
+              <th>発注ID</th>
+              <th scope="col"><%= Answer.human_attribute_name("order.paint") %></th>
+              <th scope="col"><%= Answer.human_attribute_name("scheduled_at") %></th>
+              <th scope="col"><%= Answer.human_attribute_name("quantity") %></th>
+              <th scope="col">残量[kg]</th>
+              <th scope="col"><%= Answer.human_attribute_name("note") %></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
             <% @answers.each do |answer| %>
                 <tr class="align-middle">
                   <td><%= answer.order.id%></td>
@@ -30,17 +63,13 @@
                   <td><%= answers_helper_residual(answer) %></td>
                   <td><%= answer.note %></td>
                   <td><%= link_to "編集", edit_answer_path(answer), class: "btn btn-sm btn-success" %></td>
-                  <td><%= link_to "削除", answer_path(answer), data: {
-                    turbo_method: :delete,
-                      turbo_confirm: "本当に削除しますか？"
-                    }, class: "btn btn-sm btn-danger" %></td>
+                  <td><%= link_to "削除", answer_path(answer), data: {turbo_method: :delete,
+                                                                      turbo_confirm: "本当に削除しますか？"
+                                                                      }, class: "btn btn-sm btn-danger" %></td>
                 </tr>
             <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    <% end %>
-    <h3>発注情報</h3>
-    <%= @order %>
+          </tbody>
+        </table>
+      <% end %>
+  </div>
 </div>

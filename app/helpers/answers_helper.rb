@@ -13,4 +13,13 @@ module AnswersHelper
       answer.order.quantity - answers_total_quantity
     end
   end
+
+  def answer_title(order)
+    base_title = "回答一覧"
+    if order.nil?
+      base_title
+    else
+      "発注に対する" + base_title
+    end
+  end
 end
