@@ -5,12 +5,12 @@ module AnswersHelper
     answers = answer.order.answers
     answers_total_quantity = 0
     answers.each do |ans|
-      answers_total_quantity =+ ans.quantity if ans.quantity.present?
+      answers_total_quantity += ans.quantity if ans.quantity.present?
     end
     if answers_total_quantity == 0
-      answer.order.quantity
+      return answer.order.quantity
     else
-      answer.order.quantity - answers_total_quantity
+      return answer.order.quantity - answers_total_quantity
     end
   end
 
