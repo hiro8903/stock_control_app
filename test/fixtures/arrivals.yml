@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order: one
+  user: one
+  arrival_at: 2022-09-20 12:19:27
+  lot_number: MyString
+  quantity: 1.5
+
+two:
+  order: two
+  user: two
+  arrival_at: 2022-09-20 12:19:27
+  lot_number: MyString
+  quantity: 1.5

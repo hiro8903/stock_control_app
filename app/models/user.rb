@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :orders, foreign_key: "reference_id"
   has_many :orders, foreign_key: "registerer_id"
   has_many :orders, foreign_key: "editor_id"
+  has_many :arrivals, foreign_key: "arrival_id"
   validates :name, presence: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 4 }, allow_nil: true
