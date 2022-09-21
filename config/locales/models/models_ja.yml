@@ -8,6 +8,7 @@ ja:
       paint: 塗料
       order: 発注
       answer: 回答
+      arrival: 入荷
     attributes:
         user:
           id: ID
@@ -55,3 +56,10 @@ ja:
           scheduled_at: 納入予定日
           quantity: 納入量[kg]
           note: 備考
+        arrival:
+          id: ID
+          order: 発注情報
+          user: 入荷確認者
+          arrival_at: 入荷日
+          lot_number: ロットナンバー
+          quantity: 入荷量[kg]
