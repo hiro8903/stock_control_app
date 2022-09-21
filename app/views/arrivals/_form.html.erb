@@ -1,9 +1,13 @@
 <%= form_with(model:[order,arrival]) do |form| %>
+  <%= render 'shared/error_messages_of_arrivals' %> 
+
   <%= form.label "塗料", class: "form-label m-1" %>
-  <%= form.collection_select :order, @paints, :id, :name, { selected: order.paint.id }, disabled: true, class: 'form-control my-1'%>
+  <%# 塗料名の入力フォームは表示のみのダミー。実際にはorder_idに@order.idを入れている。 %>
+  <%= form.text_field :order, value: order.paint.name , disabled: true, class: 'form-control my-1'%>
+  <%= hidden_field_tag :order, order.id %>
 
   <%= form.label :user, class: "form-label m-1" %>
-  <%= form.collection_select :user, @users, :id, :name, { selected: current_user.id }, class: 'form-control my-1'%>
+  <%= form.collection_select :user_id, @users, :id, :name, { selected: current_user.id }, class: 'form-control my-1'%>
 
   <%= form.label :arrival_at, class: "form-label m-1" %>
   <%= form.date_field :arrival_at, value: Date.today, class: 'form-control my-1'%>
