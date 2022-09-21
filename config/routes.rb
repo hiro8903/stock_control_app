@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'arrivals/index'
-  get 'arrivals/show'
-  get 'arrivals/new'
-  get 'arrivals/edit'
   get 'answers/index'
   get 'answers/show'
   get 'answers/new'
@@ -20,6 +16,7 @@ Rails.application.routes.draw do
   resources :paints
   resources :orders, shallow: true do
     resources :answers # :shallowオプションを使うことで、ルーティングの記述を複雑にせず、かつ深いネストを作らない。
+    resources :arrivals
     # 複数のリソースを指定できる。resources :deliverys を追加する予定。
   end
 end
