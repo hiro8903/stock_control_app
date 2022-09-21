@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'arrivals/index'
+  get 'arrivals/show'
+  get 'arrivals/new'
+  get 'arrivals/edit'
   get 'answers/index'
   get 'answers/show'
   get 'answers/new'
