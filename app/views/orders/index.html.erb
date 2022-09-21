@@ -25,6 +25,7 @@
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col">回答登録</th>
+                <th scope="col">入荷登録</th>
               </tr>
             </thead>
             <tbody>
@@ -62,6 +63,7 @@
                   <% else %>
                     <td><%= link_to "一覧", order_answers_path(order), class: "btn btn-sm btn-success" %></td>
                   <% end %>
+                  <td><%= link_to "入荷", new_order_arrival_path(order), class: "btn btn-sm btn-primary" %></td>
                 </tr>
             <% end %>
             </tbody>
