@@ -2,6 +2,10 @@ class ArrivalsController < ApplicationController
   def index
   end
 
+  def index_all
+    @arrivals = Arrival.all
+  end
+  
   def show
   end
 

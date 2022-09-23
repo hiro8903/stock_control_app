@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'arrivals/index_all', to: 'arrivals#index_all'
   get 'answers/index'
   get 'answers/show'
   get 'answers/new'
