@@ -1,5 +1,9 @@
 class ArrivalsController < ApplicationController
+
+  # 発注に対する入荷情報一覧ページ
   def index
+    @order = Order.find(params[:order_id])
+    @arrivals = @order.arrivals
   end
 
   def index_all

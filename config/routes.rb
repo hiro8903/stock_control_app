@@ -18,6 +18,5 @@ Rails.application.routes.draw do
   resources :orders, shallow: true do
     resources :answers # :shallowオプションを使うことで、ルーティングの記述を複雑にせず、かつ深いネストを作らない。
     resources :arrivals
-    # 複数のリソースを指定できる。resources :deliverys を追加する予定。
   end
 end

@@ -1,2 +1,67 @@
-<h1>Arrivals#index</h1>
-<p>Find me in app/views/arrivals/index.html.erb</p>
+<% provide(:title, "入荷一覧") %>
+
+<%# とりあえずコピペしただけ。これから中身整える %>
+<div class="row justify-content-center text-center">
+  <div class="col-12">
+    <h1>入荷一覧</h1>
+    <% if @order.present? %>
+      <h3>発注情報</h3>
+      <td><%= link_to "編集", edit_order_path(@order), class: "btn btn-sm btn-success" %></td>
+      <td><%= link_to "削除", order_path(@order), data: {turbo_method: :delete,
+                                                        turbo_confirm: "本当に削除しますか？"
+                                                      }, class: "btn btn-sm btn-danger" %></td>
+      <table class="table my-3">
+        <thead>
+          <tr>
+            <th scope="col"><%= Order.human_attribute_name("paint") %></th>
+            <th scope="col"><%= Order.human_attribute_name("order_on") %></th>
+            <th scope="col"><%= Order.human_attribute_name("desired_on") %></th>
+            <th scope="col"><%= Order.human_attribute_name("quantity") %></th>
+            <th scope="col"><%= Order.human_attribute_name("note") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @order.paint.name %></td>
+            <td><%= @order.order_on.strftime("%Y / %m / %d") %></td>
+            <td><%= @order.desired_on.strftime("%Y / %m / %d") %></td>
+            <td><%= @order.quantity %></td>
+            <td><%= @order.note %></td>
+          </tr>
+        </tbody>
+      <table>
+    <% end %>
+
+    <% if @arrivals.present? %>
+      <h1>入荷一覧</h1>
+      <table class="table my-3">
+        <thead>
+          <tr>
+            <th scope="col"><%= Order.human_attribute_name("order_on") %></th>
+            <th scope="col"><%= Paint.human_attribute_name("name") %></th>
+            <th scope="col"><%= Order.human_attribute_name("quantity") %></th>
+            <th scope="col"><%= Arrival.human_attribute_name("arrival_at") %></th>
+            <th scope="col"><%= Arrival.human_attribute_name("lot_number") %></th>
+            <th scope="col"><%= Arrival.human_attribute_name("quantity") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @arrivals.each do |arrival| %>
+            <tr class="align-middle">
+              <td><%= arrival.order.order_on.strftime("%Y / %m / %d") %></td>
+              <td><%= link_to arrival.order.paint.name, order_path(id: arrival.order.id) %></td>
+              <td><%= arrival.order.quantity %></td>
+              <td><%= arrival.arrival_at.strftime("%Y / %m / %d") %></td>
+              <td><%= arrival.lot_number %></td>
+              <td><%= arrival.quantity %></td>
+              <td><%= link_to "編集",edit_arrival_path(arrival), class: "btn btn-sm btn-success" %></td>
+              <td><%= link_to "削除", arrival_path(arrival), data: {turbo_method: :delete,
+                                                                  turbo_confirm: "本当に削除しますか？"
+                                                                  }, class: "btn btn-sm btn-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      <table>
+    <% end %>
+  </div>
+</div>

@@ -2,6 +2,7 @@
 
 <div class="row justify-content-center text-center">
   <div class="col-12">
+    <h1>入荷一覧</h1>
     <% if @arrivals.present? %>
       <h1>入荷一覧</h1>
       <table class="table my-3">
@@ -19,7 +20,7 @@
           <% @arrivals.each do |arrival| %>
             <tr class="align-middle">
               <td><%= arrival.order.order_on.strftime("%Y / %m / %d") %></td>
-              <td><%= arrival.order.paint.name %></td>
+              <td><%= link_to arrival.order.paint.name, order_arrivals_path(arrival) %></td>
               <td><%= arrival.order.quantity %></td>
               <td><%= arrival.arrival_at.strftime("%Y / %m / %d") %></td>
               <td><%= arrival.lot_number %></td>
