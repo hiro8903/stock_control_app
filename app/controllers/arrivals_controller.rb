@@ -51,6 +51,15 @@ class ArrivalsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
+  def destroy
+    @arrival = Arrival.find(params[:id])
+    @arrival.destroy
+    flash[:success] = "品番：#{@arrival.order.paint.name}, 数量：#{@arrival.quantity}kg, 
+                      納入日：#{@arrival.arrival_at.strftime("%Y/%m/%d") }　を削除しました。"
+    redirect_to order_arrivals_url(order_id: @arrival.order.id), status: :see_other
+  end
+  
   
   private
     def arrival_params
