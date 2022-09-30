@@ -4,6 +4,7 @@ class Arrival < ApplicationRecord
   with_options presence: true do
     validates :order_id
     validates :user_id
+    validates :arrival_at
     validates :quantity
   end
 end

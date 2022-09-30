@@ -34,8 +34,24 @@ class ArrivalsController < ApplicationController
   end
 
   def edit
+    @users = User.all
+    @paints = Paint.all
+    @arrival = Arrival.find(params[:id])
+    @order = @arrival.order
+    # @answers = @order.answers
+    # @arrival = Arrival.new(order_id: params[:order_id])
   end
 
+  def update
+    @arrival = Arrival.find(params[:id])
+    if @arrival.update(arrival_params)
+      flash[:success] = '更新に成功しました。'
+      redirect_to order_arrivals_path(order_id: @arrival.order.id)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+  
   private
     def arrival_params
       params.require(:arrival).permit(:order_id, :user_id, :arrival_at, :lot_number, :quantity)

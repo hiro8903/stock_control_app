@@ -3,8 +3,8 @@
 
   <%= form.label "塗料", class: "form-label m-1" %>
   <%# 塗料名の入力フォームは表示のみのダミー。実際にはorder_idに@order.idを入れている。 %>
-  <%= form.text_field :order, value: order.paint.name , disabled: true, class: 'form-control my-1'%>
-  <%= hidden_field_tag :order, order.id %>
+  <%= form.text_field :order, value: arrival.order.paint.name , disabled: true, class: 'form-control my-1'%>
+  <%= hidden_field_tag :order, arrival.order.id %>
 
   <%= form.label :user, class: "form-label m-1" %>
   <%= form.collection_select :user_id, @users, :id, :name, { selected: current_user.id }, class: 'form-control my-1'%>
@@ -16,8 +16,8 @@
   <%= form.text_field :lot_number, class: "form-control my-1" %>
 
   <%= form.label :quantity, class: "form-label m-1" %><br>
-  <%# maxは仮置き。のちに発注量ー総入荷量にする %>
-  <%= form.number_field :quantity, min: "0.001", max: order.quantity, step: "0.001", class: "form-control my-1" %>
+  <%# maxはのちに発注量ー総入荷量にする %>
+  <%= form.number_field :quantity, min: "0.001", step: "0.001", class: "form-control my-1" %>
 
   <div class="d-grid gap-2">
     <%= form.submit yield(:btn_text), class: "btn btn-primary my-1" %>
