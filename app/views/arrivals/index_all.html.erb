@@ -19,7 +19,7 @@
           <% @arrivals.each do |arrival| %>
             <tr class="align-middle">
               <td><%= arrival.order.order_on.strftime("%Y / %m / %d") %></td>
-              <td><%= link_to arrival.order.paint.name, order_arrivals_path(arrival) %></td>
+              <td><%= link_to arrival.order.paint.name, order_arrivals_path(arrival.order) %></td>
               <td><%= arrival.order.quantity %></td>
               <td><%= arrival.arrival_at.strftime("%Y / %m / %d") %></td>
               <td><%= arrival.lot_number %></td>

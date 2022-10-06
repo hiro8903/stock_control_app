@@ -8,7 +8,7 @@ module OrdersHelper
       answers_total_quantity
     else
       answers.each do |ans|
-        answers_total_quantity =+ ans.quantity if ans.quantity.present?
+        answers_total_quantity += ans.quantity if ans.quantity.present?
       end
       order.quantity - answers_total_quantity
     end
