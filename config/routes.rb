@@ -19,4 +19,5 @@ Rails.application.routes.draw do
     resources :answers # :shallowオプションを使うことで、ルーティングの記述を複雑にせず、かつ深いネストを作らない。
     resources :arrivals
   end
+  resources :inventories
 end
