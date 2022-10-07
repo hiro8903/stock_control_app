@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  editor: one
+  department: one
+  inventory_at: 2022-10-07
+  paint: one
+  quantity: 1.5
+
+two:
+  user: two
+  editor: two
+  department: two
+  inventory_at: 2022-10-07
+  paint: two
+  quantity: 1.5
