@@ -1,2 +1,12 @@
 <h1>Inventories#index</h1>
 <p>Find me in app/views/inventories/index.html.erb</p>
+
+<% @inventories.each do |inventory| %>
+  <ul>
+    <li><%= inventory %></li>
+<%= link_to "編集",edit_inventory_path(inventory), class: "btn btn-sm btn-success" %>
+<%= link_to "削除", inventory_path(inventory), data: {turbo_method: :delete,
+                                                                  turbo_confirm: "本当に削除しますか？"
+                                                                  }, class: "btn btn-sm btn-danger" %>
+  </ul>
+<% end %>

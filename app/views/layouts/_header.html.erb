@@ -28,6 +28,15 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              棚卸登録・確認
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><%= link_to "棚卸登録", new_inventory_path, class: "dropdown-item" %></li>
+              <li><%= link_to "棚卸一覧", inventories_path, class: "dropdown-item" %></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               マスタメンテナンス
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

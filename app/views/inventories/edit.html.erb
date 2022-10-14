@@ -1,2 +1,12 @@
-<h1>Inventories#edit</h1>
-<p>Find me in app/views/inventories/edit.html.erb</p>
+<% provide(:title, "棚卸編集") %>
+<% provide(:btn_text, '更新') %>
+
+<div class="text-center">
+  <h1>棚卸編集</h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+    <%= render "form", inventory: @inventory %>
+  </div>
+</div>
