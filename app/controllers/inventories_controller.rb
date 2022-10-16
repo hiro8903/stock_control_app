@@ -1,7 +1,15 @@
 class InventoriesController < ApplicationController
   def index
-    @day = Date.today
-    @inventories = Inventory.all
+    @day = Date.current
+    @this_year = @day.year
+    @this_month = @day.month
+    @prev_month = @day.prev_month
+    @prev_year = @prev_month.year
+    @prev_month = @prev_month.month
+    @inventories = Inventory.where(department_id: current_user.department.id)
+    @departments = Department.all.order(name: :asc)
+    @paints = Paint.all.order(name: :asc)
+
   end
 
   def show
