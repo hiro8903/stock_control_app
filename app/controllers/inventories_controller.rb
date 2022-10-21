@@ -1,4 +1,8 @@
 class InventoriesController < ApplicationController
+  before_action :set_user, only: [:index, :show, :edit, :update]
+  before_action :set_department_monthly_inventory, only: [:index]
+
+
   def index
     @day = Date.current
     @this_year = @day.year
@@ -26,6 +30,7 @@ class InventoriesController < ApplicationController
     @users = User.all
     @paints = Paint.all
     @inventory = Inventory.new(inventories_params)
+    params["inventory"]["inventory_at"]  << "-1" 
     if @inventory.save
       flash[:success] = '棚卸し登録しました。'
       redirect_to inventories_path

@@ -6,7 +6,6 @@
       <thead>
         <tr>
           <th scope="col">塗料名</th>
-          <th scope="col"><%=  %></th>
           <th scope="col"><%= @day.strftime("%Y年%m月") %></th>
         </tr>
       </thead>
@@ -14,9 +13,8 @@
         <% @paints.each do |paint| %>
           <tr class="align-middle">
             <td><%= paint.name %></td>
-            <% @inventories.where(paint_id: paint.id).each do |inventory| %>
+            <% @department_monthly_inventory.where(paint_id: paint.id).each do |inventory| %>
               <td><%= inventory.quantity %></td>
-              <td></td>
             <% end %>
           </tr>
         <% end %>
