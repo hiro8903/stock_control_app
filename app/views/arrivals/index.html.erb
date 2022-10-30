@@ -35,9 +35,9 @@
     <% if @arrivals.present? %>
       <h1>入荷一覧</h1>
       <% if arrivals_helper_residual(@order).to_i != 0 %>
-        <td><%= link_to "新規回答登録", new_order_arrival_path(@order), class: "btn btn-sm btn-primary" %></td>
+        <td><%= link_to "新規入荷登録", new_order_arrival_path(@order), class: "btn btn-sm btn-primary" %></td>
       <% else %>
-        <td><%= link_to "新規回答できません", new_order_arrival_path(@order), class: "btn btn-sm btn-primary disabled" %></td>
+        <td><%= link_to "完納されています", new_order_arrival_path(@order), class: "btn btn-sm btn-primary disabled" %></td>
       <% end %>
       <table class="table my-3">
         <thead>
