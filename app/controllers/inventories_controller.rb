@@ -10,10 +10,9 @@ class InventoriesController < ApplicationController
     @prev_month = @day.prev_month
     @prev_year = @prev_month.year
     @prev_month = @prev_month.month
-    @inventories = Inventory.where(department_id: current_user.department.id)
+    @inventories = Inventory.where(department_id: current_user.department.id) if Inventory.count > 0
     @departments = Department.all.order(name: :asc)
-    @paints = Paint.all.order(name: :asc)
-
+    @paints = @inventories.paints.order(name: :asc) unless @inventories.nil?
   end
 
   def show
