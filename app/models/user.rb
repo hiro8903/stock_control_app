@@ -6,7 +6,10 @@ class User < ApplicationRecord
   has_many :arrivals, foreign_key: "arrival_id"
   has_many :inventorys, foreign_key: "reference_id"
   has_many :inventorys, foreign_key: "editor_id"
-  validates :name, presence: true
+  with_options presence: true do
+    validates :name
+    validates :department_id
+  end
   has_secure_password
   validates :password, presence: true, length: { minimum: 4 }, allow_nil: true
 end
