@@ -8,18 +8,6 @@
 
 # coding: utf-8
 
-User.create!(name: "Sample User",
-            password: "pass",
-            password_confirmation: "pass")
-
-60.times do |n|
-  name  = Faker::Name.name
-  password = "pass"
-  User.create!(name: name,
-              password: password,
-              password_confirmation: password)
-end
-
 # 部署作成
 def create_department(name)
   Department.create!(name: name)
@@ -28,6 +16,20 @@ end
 create_department("営業部")
 create_department("品質管理部")
 create_department("生産管理課")
+
+User.create!(name: "Sample User",
+            password: "pass",
+            password_confirmation: "pass",
+            department_id: 1)
+
+60.times do |n|
+  name  = Faker::Name.name
+  password = "pass"
+  User.create!(name: name,
+              password: password,
+              password_confirmation: password,
+              department_id: "#{rand(1..3)}")
+end
 
 # メーカー作成
 def create_manufacturer(name)
