@@ -20,4 +20,5 @@ Rails.application.routes.draw do
     resources :arrivals
   end
   resources :inventories
+  resources :all_inventories, only: [:index, :create, :update, :destroy] 
 end
