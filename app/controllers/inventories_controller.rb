@@ -1,15 +1,11 @@
 class InventoriesController < ApplicationController
   before_action :set_user, only: [:index, :show, :edit, :update]
+  before_action :set_day, only: [:index]
   before_action :set_department_monthly_inventoies, only: [:index]
 
 
   def index
     @day = Date.current
-    @this_year = @day.year
-    @this_month = @day.month
-    @prev_month = @day.prev_month
-    @prev_year = @prev_month.year
-    @prev_month = @prev_month.month
     @inventories = Inventory.where(department_id: current_user.department.id) if Inventory.count > 0
   end
 
