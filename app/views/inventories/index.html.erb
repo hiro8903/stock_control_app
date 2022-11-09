@@ -13,18 +13,20 @@
           <th scope="col"><%= @first_day.strftime("%Y年%m月") %></th>
         </tr>
       </thead>
-      <% if @paints.present? %>
       <tbody>
-        <% @paints.each do |paint| %>
+      <% if @department_monthly_inventoies.present? %>
+        <% @department_monthly_inventoies.each do |inventory| %>
           <tr class="align-middle">
-            <td><%= paint.name %></td>
-            <% @department_monthly_inventory.where(paint_id: paint.id).each do |inventory| %>
-              <td><%= inventory.quantity %></td>
-            <% end %>
+            <td><%= inventory.paint.name %></td>
+            <td><%= inventory.quantity %></td>
           </tr>
         <% end %>
-      </tbody>
+      <% else %>
+        <tr>
+          <td colspan="3">棚卸登録されていません。</td>
+        </tr>
       <% end %>
+      </tbody>
     <table>
   </div>
 </div>

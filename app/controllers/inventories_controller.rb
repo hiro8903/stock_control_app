@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
   before_action :set_user, only: [:index, :show, :edit, :update]
-  before_action :set_department_monthly_inventory, only: [:index]
+  before_action :set_department_monthly_inventoies, only: [:index]
 
 
   def index
@@ -12,7 +12,6 @@ class InventoriesController < ApplicationController
     @prev_month = @prev_month.month
     @inventories = Inventory.where(department_id: current_user.department.id) if Inventory.count > 0
     @departments = Department.all.order(name: :asc)
-    @paints = @inventories.paints.order(name: :asc) unless @inventories.nil?
   end
 
   def show
