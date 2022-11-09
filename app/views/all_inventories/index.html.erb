@@ -1,2 +1,38 @@
-<h1>AllInventories#index</h1>
-<p>Find me in app/views/all_inventories/index.html.erb</p>
+<div class="row justify-content-center text-center">
+  <div class="col-12">
+    <h1><%= "#{}月 月次棚卸まとめ" %></h1>
+    <%# link_to "⇦ 前月へ", all_inventories_path(date: @first_day.prev_month), class: "btn btn-info" %>
+    <%# link_to "今月へ", all_inventories_path(date: @day.beginning_of_month), class: "btn btn-warning" %>
+    <%# link_to "次月へ ⇨", all_inventories_path(date: @first_day.next_month), class: "btn btn-info" %>
+
+    <h5 class="text-end">*単位：kg</h5>
+    <table class="table my-3">
+      <thead>
+        <tr>
+          <th scope="col"><%= AllInventory.human_attribute_name("paint_id") %></th>
+          <th scope="col"><%= AllInventory.human_attribute_name("quantity") %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% if @all_inventories.present? %>
+        <% @all_inventories.each do |inventory| %>
+          <tr class="align-middle">
+            <td><%= inventory.paint.name %></td>
+            <td><%= link_to "#{inventory.quantity}", edit_inventory_path(inventory) %></td>
+              <td><%# inventory.editor.name %></td>
+              <td><%# inventory.updated_at.strftime("%m/%d %R") %></td>
+              <td><%# link_to "削除", inventory_path(inventory), data: {
+                      turbo_method: :delete,
+                        turbo_confirm: "本当に削除しますか？"
+                      }, class: "btn btn-sm btn-danger" %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="2">棚卸登録されていません。</td>
+        </tr>
+      <% end %>
+      </tbody>
+    <table>
+  </div>
+</div>

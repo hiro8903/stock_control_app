@@ -1,7 +1,8 @@
 class AllInventoriesController < ApplicationController
-  
-  def index
 
+  def index
+    # 仮設定
+    @all_inventories = AllInventory.all
   end
 
   def create
