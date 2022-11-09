@@ -9,8 +9,13 @@
     <table class="table my-3">
       <thead>
         <tr>
-          <th scope="col">塗料名</th>
+          <th scope="col"><%= Inventory.human_attribute_name("paint_id") %></th>
           <th scope="col"><%= @first_day.strftime("%Y年%m月") %></th>
+          <th scope="col"><%= Inventory.human_attribute_name("user_id") %></th>
+          <th scope="col"><%= Inventory.human_attribute_name("created_at") %></th>
+          <th scope="col"><%= Inventory.human_attribute_name("editor_id") %></th>
+          <th scope="col"><%= Inventory.human_attribute_name("updated_at") %></th>
+
         </tr>
       </thead>
       <tbody>
@@ -18,12 +23,25 @@
         <% @department_monthly_inventoies.each do |inventory| %>
           <tr class="align-middle">
             <td><%= inventory.paint.name %></td>
-            <td><%= inventory.quantity %></td>
+            <td><%= link_to "#{inventory.quantity}", edit_inventory_path(inventory) %></td>
+            <td><%= inventory.user.name %></td>
+            <td><%= inventory.created_at.strftime("%m/%d %R") %></td>
+            <% if inventory.created_at != inventory.updated_at %>
+              <td><%= inventory.editor.name %></td>
+              <td><%= inventory.updated_at.strftime("%m/%d %R") %></td>
+            <% else %>
+              <td>-</td>
+              <td>-</td>
+            <% end %>
+            <td><%= link_to "削除", inventory_path(inventory), data: {
+                    turbo_method: :delete,
+                      turbo_confirm: "本当に削除しますか？"
+                    }, class: "btn btn-sm btn-danger" %></td>
           </tr>
         <% end %>
       <% else %>
         <tr>
-          <td colspan="3">棚卸登録されていません。</td>
+          <td colspan="6">棚卸登録されていません。</td>
         </tr>
       <% end %>
       </tbody>

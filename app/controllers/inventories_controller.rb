@@ -43,7 +43,9 @@ class InventoriesController < ApplicationController
   end
 
   def update
+    @paints = Paint.all
     @inventory = Inventory.find(params[:id])
+    params["inventory"]["inventory_at"]  << "-1" 
     if @inventory.update(inventories_params)
       flash[:success] = '更新に成功しました。'
       redirect_to inventories_path

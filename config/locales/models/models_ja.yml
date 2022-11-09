@@ -9,6 +9,7 @@ ja:
       order: 発注
       answer: 回答
       arrival: 入荷
+      inventory: 棚卸
     attributes:
         user:
           id: ID
@@ -63,3 +64,13 @@ ja:
           arrival_at: 入荷日
           lot_number: ロットナンバー
           quantity: 入荷量[kg]
+        inventory:
+          id: ID
+          user_id: 登録者
+          editor_id: 編集者
+          department_id: 部署
+          inventory_at: 棚卸実施日
+          paint_id: 塗料名
+          quantity: 在庫量[kg]
+          created_at: 登録日時
+          updated_at: 編集日時
