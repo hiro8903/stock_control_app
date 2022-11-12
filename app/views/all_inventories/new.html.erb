@@ -1,0 +1,42 @@
+<% provide(:title, "各棚卸確認") %>
+<% provide(:btn_text, '棚卸確定') %>
+
+<div class="text-center">
+  <h1><%= "#{@first_day.strftime("%Y年%m月")} 各部署の棚卸確認・確定" %></h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+    <table id ="fav-table" class="table">
+      <thead>
+        <tr>
+          <th scope="col"><%= AllInventory.human_attribute_name("paint_id") %></th>
+          <% @departments.each do |department| %>
+            <th scope="col"><%= department.name %></th>
+          <% end %>
+          <th scope="col">合計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @paints.each do |paint| %>
+          <tr>
+            <% total_quantity_of_paint = 0 %>
+            <td><%= paint.name %></td>
+            <% @departments.each do |department| %>
+              <% if inventory_of_paint(department, paint).present? %>
+                <td><%= inventory_of_paint(department, paint).quantity %></td>
+                <% total_quantity_of_paint += inventory_of_paint(department, paint).quantity %>
+              <% else %>
+                <td>-</td>
+              <% end %>
+            <% end %>
+            <td><%= total_quantity_of_paint %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+              <td><%#$ each_monthly_inventory(inventory, paint).present? ? each_monthly_inventory(inventory, paint).id : "-" %></td>
