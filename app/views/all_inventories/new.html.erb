@@ -7,36 +7,46 @@
 
 <div class="row justify-content-center">
   <div class="col-5">
-    <table id ="fav-table" class="table">
-      <thead>
-        <tr>
-          <th scope="col"><%= AllInventory.human_attribute_name("paint_id") %></th>
-          <% @departments.each do |department| %>
-            <th scope="col"><%= department.name %></th>
-          <% end %>
-          <th scope="col">合計</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @paints.each do |paint| %>
-          <tr>
-            <% total_quantity_of_paint = 0 %>
-            <td><%= paint.name %></td>
-            <% @departments.each do |department| %>
-              <% if inventory_of_paint(department, paint).present? %>
-                <td><%= inventory_of_paint(department, paint).quantity %></td>
-                <% total_quantity_of_paint += inventory_of_paint(department, paint).quantity %>
-              <% else %>
-                <td>-</td>
+    <%= form_with model: @all_inventory_collections, url: all_inventories_path(date: @first_day), local: true do |form| %>
+      <% @all_inventory_collections.collection.each do |monthly_inventory|%>
+        <%= fields_for 'all_inventories[]', monthly_inventory do |field| %>
+          <table id ="fav-table" class="table">
+            <thead>
+              <tr>
+                <th scope="col"><%= AllInventory.human_attribute_name("paint_id") %></th>
+                <% @departments.each do |department| %>
+                  <th scope="col"><%= department.name %></th>
+                <% end %>
+                <th scope="col">合計</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @paints.each do |paint| %>
+                <tr>
+                  <% total_quantity_of_paint = 0 %>
+                  <td><%= paint.name %></td>
+                  <% @departments.each do |department| %>
+                    <% if inventory_of_paint(department, paint).present? %>
+                      <td><%= inventory_of_paint(department, paint).quantity %></td>
+                      <% total_quantity_of_paint += inventory_of_paint(department, paint).quantity %>
+                    <% else %>
+                      <td>-</td>
+                    <% end %>
+                  <% end %>
+                  <td><%= total_quantity_of_paint %></td>
+                  <%= field.hidden_field :paint_id, value: paint.id %>
+                  <%= field.hidden_field :inventory_at, value: @first_day %>
+                  <%= field.hidden_field :quantity, value: total_quantity_of_paint %>
+                </tr>
               <% end %>
-            <% end %>
-            <td><%= total_quantity_of_paint %></td>
-          </tr>
+            </tbody>
+          </table>
         <% end %>
-      </tbody>
-      
-    </table>
+      <% end %>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
   </div>
-</div>
+</div> 
 
-              <td><%#$ each_monthly_inventory(inventory, paint).present? ? each_monthly_inventory(inventory, paint).id : "-" %></td>

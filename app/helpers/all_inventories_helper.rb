@@ -7,5 +7,9 @@ module AllInventoriesHelper
   def inventory_of_paint(department, paint)
     paint.inventories.find_by(inventory_at: @first_day..@last_day, department_id: department.id, paint_id: paint.id)
   end
+
+  def monthly_inventory(paint)
+    AllInventory.find_by(inventory_at: @first_day, paint_id: paint.id)
+  end
   
 end

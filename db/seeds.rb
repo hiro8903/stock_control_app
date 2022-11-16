@@ -13,14 +13,28 @@ def create_department(name)
   Department.create!(name: name)
 end
 
-create_department("営業部")
-create_department("品質管理部")
-create_department("生産管理課")
+create_department("管理課")
+create_department("A課")
+create_department("B課")
+create_department("C課")
 
 User.create!(name: "Sample User",
             password: "pass",
             password_confirmation: "pass",
             department_id: 1)
+
+User.create!(name: "User A",
+            password: "pass",
+            password_confirmation: "pass",
+            department_id: 2)
+User.create!(name: "User B",
+            password: "pass",
+            password_confirmation: "pass",
+            department_id: 3)
+User.create!(name: "User C",
+              password: "pass",
+              password_confirmation: "pass",
+              department_id: 4)
 
 60.times do |n|
   name  = Faker::Name.name
@@ -91,9 +105,31 @@ def create_order(paint_id,
                 total_price: total_price)
 end
 
-userA = User.find(1)
-userB = User.find(2)
-paintA = Paint.find(1)
-paintB = Paint.find(2)
-create_order(paintA.id, userA.id, Date.today, 50, Date.today.next_month, "びこう", userA.id, userA.id, paintA.unit_price, paintA.unit_price * 50)
-create_order(paintB.id, userB.id, Date.today, 100, Date.today.next_month, "びこう", userB.id, userB.id, paintB.unit_price, paintB.unit_price * 100)
+
+  userA = User.find(2)
+  userB = User.find(3)
+  paintA = Paint.find(1)
+  paintB = Paint.find(2)
+  
+  create_order(paintA.id, userA.id, Date.today, 50, Date.today.next_month, "びこう", userA.id, userA.id, paintA.unit_price, paintA.unit_price * 50)
+  create_order(paintB.id, userB.id, Date.today, 100, Date.today.next_month, "びこう", userB.id, userB.id, paintB.unit_price, paintB.unit_price * 100)
+
+# 各班の棚卸作成
+def create_inventory(user_id,
+                    editor_id,
+                    department_id,
+                    inventory_at,
+                    paint_id,
+                    quantity)
+  Inventory.create!(user_id: user_id,
+                    editor_id: editor_id,
+                    department_id: department_id,
+                    inventory_at: inventory_at,
+                    paint_id: paint_id,
+                    quantity: quantity)
+                    
+end
+
+  create_inventory(userA.id,userA.id,userA.department_id,Date.current.beginning_of_month, paintA.id, 10)
+  create_inventory(userA.id,userA.id,userA.department_id,Date.current.beginning_of_month, paintB.id, 20)
+  create_inventory(userB.id,userB.id,userB.department_id,Date.current.beginning_of_month, paintA.id, 10)
