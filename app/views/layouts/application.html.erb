@@ -18,7 +18,39 @@
     <%# jQuery本体とtablesorterのjs、cssの読み込み %>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+
+    <%# 表のソートアイコン %>
+    <style>
+    .tablesorter-headerUnSorted {
+        background-image:url("/images/sort-color.png");
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+    .tablesorter-headerAsc {
+        background-image:url("/images/sort-a-color.png");
+
+        background-repeat: no-repeat;
+        background-position: center right;
+        border-bottom: #000 2px solid;
+    }
+    .tablesorter-headerDesc {
+        background-image:url("/images/sort-d-color.png");
+
+        background-repeat: no-repeat;
+        background-position: center right;
+        border-bottom: #000 2px solid;
+    }
+    .sorter-false {
+        background-image: none;
+    }
+    </style>
+    <script> 
+      // tablesorterの導入　ソートの実行
+      $(document).ready(function() {
+        $('#fav-table').tablesorter();
+      });
+    </script> 
+
   </head>
 
   <body>
