@@ -6,7 +6,7 @@
     <%= link_to "次月へ ⇨", inventories_path(date: @first_day.next_month), class: "btn btn-info" %>
 
     <h5 class="text-end">*単位：kg</h5>
-    <table class="table my-3">
+    <table id ="fav-table" class="table my-3">
       <thead>
         <tr>
           <th scope="col"><%= Inventory.human_attribute_name("paint_id") %></th>

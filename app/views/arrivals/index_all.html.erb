@@ -4,7 +4,7 @@
   <div class="col-12">
     <h1>入荷一覧</h1>
     <% if @arrivals.present? %>
-      <table class="table my-3">
+      <table id ="fav-table" class="table my-3">
         <thead>
           <tr>
             <th scope="col"><%= Order.human_attribute_name("order_on") %></th>

@@ -1,5 +1,4 @@
 <% provide(:title, "回答一覧") %>
-
 <div class="text-center my-3">
   <h1><%= answer_title(@order) %></h1>
 </div>
@@ -14,6 +13,7 @@
         <table class="table my-3">
           <thead>
             <tr>
+              <th scope="col">発注<%= Order.human_attribute_name("id") %></th>
               <th scope="col"><%= Order.human_attribute_name("paint") %></th>
               <th scope="col"><%= Order.human_attribute_name("order_on") %></th>
               <th scope="col"><%= Order.human_attribute_name("desired_on") %></th>
@@ -23,6 +23,7 @@
           </thead>
           <tbody>
             <tr>
+              <td><%= @order.id %></td>
               <td><%= @order.paint.name %></td>
               <td><%= @order.order_on.strftime("%Y / %m / %d") %></td>
               <td><%= @order.desired_on.strftime("%Y / %m / %d") %></td>
@@ -40,24 +41,20 @@
       <% end %>
 
       <% if @answers.present? %>
-        <table class="table my-3">
+        <table id ="fav-table" class="table my-3">
           <thead>
             <tr>
-              <th>発注ID</th>
               <th scope="col"><%= Answer.human_attribute_name("order.paint") %></th>
               <th scope="col"><%= Answer.human_attribute_name("scheduled_at") %></th>
               <th scope="col"><%= Answer.human_attribute_name("quantity") %></th>
               <th scope="col">残量[kg]</th>
               <th scope="col"><%= Answer.human_attribute_name("note") %></th>
-              <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
             <% @answers.each do |answer| %>
                 <tr class="align-middle">
-                  <td><%= answer.order.id%></td>
-                  <td><%= link_to answer.order.paint.name, answer %></td>
+                  <td><%= answer.order.paint.name %></td>
                   <td><%= answer.scheduled_at.strftime("%Y / %m / %d") %></td>
                   <td><%= answer.quantity %></td>
                   <td><%= answers_helper_residual(answer) %></td>

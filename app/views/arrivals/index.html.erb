@@ -39,7 +39,7 @@
       <% else %>
         <td><%= link_to "完納されています", new_order_arrival_path(@order), class: "btn btn-sm btn-primary disabled" %></td>
       <% end %>
-      <table class="table my-3">
+      <table id ="fav-table" class="table my-3">
         <thead>
           <tr>
             <th scope="col"><%= Order.human_attribute_name("order_on") %></th>
