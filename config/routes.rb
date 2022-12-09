@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   resources :departments
   resources :manufacturers
   resources :suppliers
-  resources :paints
+  resources :paints do
+    member do
+      patch 'all_inventories/update'
+    end
+  end
   resources :orders, shallow: true do
     resources :answers # :shallowオプションを使うことで、ルーティングの記述を複雑にせず、かつ深いネストを作らない。
     resources :arrivals

@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   def set_day
     @first_day = params[:date].nil? ? Date.current.beginning_of_month : params[:date].to_date
     @last_day = @first_day.end_of_month
+    @all_inventory = AllInventory.find_by(inventory_at: @first_day)
   end
   
   def set_department_monthly_inventoies

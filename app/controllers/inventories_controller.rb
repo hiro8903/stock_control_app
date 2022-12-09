@@ -44,7 +44,11 @@ class InventoriesController < ApplicationController
     params["inventory"]["inventory_at"]  << "-1" 
     if @inventory.update(inventories_params)
       flash[:success] = '更新に成功しました。'
-      redirect_to inventories_path
+      if params[:action] == "new"
+        redirect_to inventories_path
+      else
+        redirect_to edit_all_inventory_path(inventory_at: @first_day)
+      end
     else
       render :edit, status: :unprocessable_entity
     end

@@ -1,0 +1,59 @@
+<% provide(:title, "棚卸編集") %>
+<% provide(:btn_text, '棚卸更新') %>
+
+<div class="text-center">
+  <h1><%="#{@all_inventory.inventory_at.strftime("%Y年%m月")} 各部署の棚卸確認・確定" %></h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+    <%= form_with model: @paint, url: all_inventory_path(date: @all_inventory.inventory_at), local: true, method: :patch do |form| %>
+            <% times = 0 %>
+            <% times += 1 %>
+            <% if times == 1%>
+      <%= @all_inventory_collections.each do |monthly_inventory|%>
+        <%= fields_for 'all_inventories[]', monthly_inventory do |field| %>
+          <table id ="fav-table" class="table">
+            <thead>
+              <tr>
+                <th scope="col"><%= AllInventory.human_attribute_name("paint_id") %></th>
+                <% @departments.each do |department| %>
+                  <th scope="col"><%= department.name %></th>
+                <% end %>
+                <th scope="col">合計</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @paints.each do |paint| %>
+                <tr>
+                  <% total_quantity_of_paint = 0 %>
+                  <td><%= paint.name %></td>
+                  <% @departments.each do |department| %>
+                    <% if inventory_of_paint(department, paint, monthly_inventory).present? %>
+                      <td>
+                        <%= link_to inventory_of_paint(department, paint, monthly_inventory).quantity, edit_inventory_path(inventory_of_paint(department, paint, monthly_inventory))  %><br>
+                        <%= department.name %>
+                      </td>
+                      <% total_quantity_of_paint += inventory_of_paint(department, paint, monthly_inventory).quantity %>
+                    <% else %>
+                      <td>-</td>
+                    <% end %>
+                  <% end %>
+                  <td><%= total_quantity_of_paint %></td>
+                  <%= field.number_field :paint_id, value: paint.id %>
+                  <%= field.date_field :inventory_at, value: monthly_inventory.inventory_at %>
+                  <%= field.number_field :quantity, value: total_quantity_of_paint %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      <% end %>
+      <div class="actions">
+        <%= form.submit yield(:btn_text), class: "btn btn-success" %>
+      </div>
+            <% end %>
+    <% end %>
+  </div>
+</div> 
+

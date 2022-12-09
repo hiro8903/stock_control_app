@@ -26,9 +26,9 @@
                   <% total_quantity_of_paint = 0 %>
                   <td><%= paint.name %></td>
                   <% @departments.each do |department| %>
-                    <% if inventory_of_paint(department, paint).present? %>
-                      <td><%= inventory_of_paint(department, paint).quantity %></td>
-                      <% total_quantity_of_paint += inventory_of_paint(department, paint).quantity %>
+                    <% if inventory_of_paint(department, paint, nil).present? %>
+                      <td><%= inventory_of_paint(department, paint, nil).quantity %></td>
+                      <% total_quantity_of_paint += inventory_of_paint(department, paint, nil).quantity %>
                     <% else %>
                       <td>-</td>
                     <% end %>
@@ -44,7 +44,7 @@
         <% end %>
       <% end %>
       <div class="actions">
-        <%= form.submit %>
+        <%= form.submit yield(:btn_text), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>

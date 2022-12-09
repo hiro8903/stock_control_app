@@ -2,17 +2,24 @@
  <%= render 'shared/error_messages_of_inventories' %> 
 
   <%= form.label :inventory_at, class: "form-label m-1" %><br>
-  <%= form.date_field :inventory_at, value: "#{Date.current.year}-#{Date.current.month}", type: "month", discard_day: true, class: 'form-control my-1'%>
-
+  <% if inventory.inventory_at.present?%>
+    <%= form.date_field :inventory_at, value: "#{inventory.inventory_at.year}-#{inventory.inventory_at.month}", type: "month", discard_day: true, class: 'form-control my-1'%>
+  <% else %>
+    <%= form.date_field :inventory_at, value: "#{Date.current.year}-#{Date.current.month}", type: "month", discard_day: true, class: 'form-control my-1'%>
+  <% end %>
   <%= form.label :paint, class: "form-label m-1" %>
   <%= form.collection_select :paint_id, @paints, :id, :name, {  include_blank: "選択してください" }, class: 'form-control my-1' %>
 
   <%= form.label :quantity, class: "form-label m-1" %><br>
   <%= form.number_field :quantity, min: "0.001", step: "0.001", class: "form-control my-1" %>
 
+ <% if params[:action] == "new" %>
   <%= form.hidden_field :user_id, value: current_user.id if inventory.created_at == inventory.updated_at %>
   <%= form.hidden_field :editor_id, value: current_user.id %>
   <%= form.hidden_field :department_id, value: current_user.department.id %>
+<% else %>
+  <%= form.hidden_field :editor_id, value: current_user.id %>
+<% end %>
 
   <div class="d-grid gap-2">
     <%= form.submit yield(:btn_text), class: "btn btn-primary mt-1" %>
