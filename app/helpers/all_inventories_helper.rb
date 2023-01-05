@@ -13,6 +13,10 @@ module AllInventoriesHelper
     end
   end
 
+  def inventory(department, monthly_inventory)
+    Inventory.find_by(department_id: department.id, inventory_at: monthly_inventory.inventory_at, paint_id: monthly_inventory.paint.id)
+  end
+
   def monthly_inventory(paint)
     AllInventory.find_by(inventory_at: @first_day, paint_id: paint.id)
   end
