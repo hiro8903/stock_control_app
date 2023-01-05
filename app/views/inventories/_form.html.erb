@@ -13,13 +13,17 @@
   <%= form.label :quantity, class: "form-label m-1" %><br>
   <%= form.number_field :quantity, min: "0.001", step: "0.001", class: "form-control my-1" %>
 
- <% if params[:action] == "new" %>
-  <%= form.hidden_field :user_id, value: current_user.id if inventory.created_at == inventory.updated_at %>
-  <%= form.hidden_field :editor_id, value: current_user.id %>
-  <%= form.hidden_field :department_id, value: current_user.department.id %>
-<% else %>
-  <%= form.hidden_field :editor_id, value: current_user.id %>
-<% end %>
+  <% if params[:action] == "new" %>
+    <%= form.hidden_field :user_id, value: current_user.id if inventory.created_at == inventory.updated_at %>
+    <%= form.hidden_field :editor_id, value: current_user.id %>
+    <% if params["department"].present? %>
+      <%= form.hidden_field :department_id, value: params["department"] %>
+    <% else %>
+      <%= form.hidden_field :department_id, value: current_user.id %>
+    <% end %>
+  <% else %>
+    <%= form.hidden_field :editor_id, value: current_user.id %>
+  <% end %>
 
   <div class="d-grid gap-2">
     <%= form.submit yield(:btn_text), class: "btn btn-primary mt-1" %>

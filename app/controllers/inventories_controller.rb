@@ -17,6 +17,13 @@ class InventoriesController < ApplicationController
     @users = User.all
     @paints = Paint.all
     @inventory = Inventory.new
+    # 棚卸まとめの編集ページから来た場合、数量登録の無い品番へ部署・棚卸日・塗料のデータを入れる。
+    if params["department"].present? && params["inventory_at"].present? && params["paint"]
+      @inventory["department_id"] = params["department"]
+      @inventory["inventory_at"] = params["inventory_at"]
+      @inventory["paint_id"] = params["paint"]
+    end
+    session[:previous_url] = request.referer  # ここで前ページセッションを保存
   end
 
   def create
@@ -26,7 +33,7 @@ class InventoriesController < ApplicationController
     params["inventory"]["inventory_at"]  << "-1" 
     if @inventory.save
       flash[:success] = '棚卸し登録しました。'
-      redirect_to inventories_path
+      redirect_to session[:previous_url]  # create後に遷移させる
     else
       render :new, status: :unprocessable_entity
     end
@@ -41,9 +48,11 @@ class InventoriesController < ApplicationController
   def update
     @paints = Paint.all
     @inventory = Inventory.find(params[:id])
+    @before_quantity = @inventory.quantity
     params["inventory"]["inventory_at"]  << "-1" 
     if @inventory.update(inventories_params)
-      flash[:success] = '更新に成功しました。'
+      flash[:success] = "#{@inventory.department.name}の棚卸を更新しました。<br>
+      #{@inventory.paint.name}：#{@before_quantity} ➡︎ #{@inventory.quantity}"
       if params[:action] == "new"
         redirect_to inventories_path
       else
