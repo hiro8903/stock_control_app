@@ -66,7 +66,11 @@ class AllInventoriesController < ApplicationController
   end
   
   def destroy
-    
+    @all_monthly_inventories = AllInventory.where(inventory_at: params["inventory_at"])
+    @inventory_at = @all_monthly_inventories.first.inventory_at.strftime("%Y年%m月")
+    @all_monthly_inventories.destroy_all
+    flash[:success] = "#{@inventory_at}の棚卸を削除しました。"
+    redirect_to all_inventories_url(date: params["inventory_at"])
   end
   
   private
