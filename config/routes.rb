@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   end
   resources :inventories
   resources :all_inventories
+  resources :withdraws
 end

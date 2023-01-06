@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :arrivals, foreign_key: "arrival_id"
   has_many :inventorys, foreign_key: "reference_id"
   has_many :inventorys, foreign_key: "editor_id"
+  has_many :withdraws, foreign_key: "reference_id"
   with_options presence: true do
     validates :name
     validates :department_id
