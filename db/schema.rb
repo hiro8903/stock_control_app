@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_06_103702) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_145140) do
   create_table "all_inventories", force: :cascade do |t|
     t.integer "paint_id", null: false
     t.date "inventory_at", null: false
@@ -129,8 +129,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_103702) do
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 
+  create_table "withdraw_collections", force: :cascade do |t|
+    t.datetime "withdraw_at", null: false
+    t.integer "user_id", null: false
+    t.integer "department_id", null: false
+    t.integer "paint_id", null: false
+    t.string "lot_number"
+    t.float "quantity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_withdraw_collections_on_department_id"
+    t.index ["paint_id"], name: "index_withdraw_collections_on_paint_id"
+    t.index ["user_id"], name: "index_withdraw_collections_on_user_id"
+  end
+
   create_table "withdraws", force: :cascade do |t|
-    t.datetime "withdrow_at", null: false
+    t.datetime "withdraw_at", null: false
     t.integer "user_id", null: false
     t.integer "department_id", null: false
     t.integer "paint_id", null: false
@@ -158,6 +172,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_103702) do
   add_foreign_key "orders", "users", column: "registerer_id"
   add_foreign_key "paints", "manufacturers"
   add_foreign_key "users", "departments"
+  add_foreign_key "withdraw_collections", "departments"
+  add_foreign_key "withdraw_collections", "paints"
+  add_foreign_key "withdraw_collections", "users"
   add_foreign_key "withdraws", "departments"
   add_foreign_key "withdraws", "paints"
   add_foreign_key "withdraws", "users"

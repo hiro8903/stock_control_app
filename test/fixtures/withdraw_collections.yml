@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  withdrow_at: 2023-01-11 23:51:40
+  user: one
+  department: one
+  paint: one
+  lot_number: MyString
+  quantity: 1.5
+
+two:
+  withdrow_at: 2023-01-11 23:51:40
+  user: two
+  department: two
+  paint: two
+  lot_number: MyString
+  quantity: 1.5

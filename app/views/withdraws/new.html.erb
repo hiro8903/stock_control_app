@@ -1,2 +1,12 @@
-<h1>Withdraws#new</h1>
-<p>Find me in app/views/withdraws/new.html.erb</p>
+<% provide(:title, "出庫登録") %>
+<% provide(:btn_text, '新規登録') %>
+
+<div class="text-center">
+  <h1>出庫登録</h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+    <%= render "form", collections: @withdraw_collections %>
+  </div>
+</div>

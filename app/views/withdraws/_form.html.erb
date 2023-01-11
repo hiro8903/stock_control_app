@@ -1,0 +1,33 @@
+<%= form_with model: collections, url: new_withdraw_path, local: true do |form| %>
+  <div class="col-3">
+    <%= form.label "出庫日", class: "form-label my-1" %><br>
+    <%= form.date_field :withdraw_at, value: Date.current, class: "form-control my-1" %>
+  </div>
+  <table class="table border-0">
+    <thead>
+      <tr>
+        <th scope="col"><%= Withdraw.human_attribute_name("paint_id") %></th>
+        <th scope="col"><%= Withdraw.human_attribute_name("lot_number") %></th>
+        <th scope="col"><%= Withdraw.human_attribute_name("quantity") %></th>
+      </tr>
+    </thead>
+      <% collections.collection.each do |withdraw|%>
+        <%= fields_for 'withdraws[]', withdraw do |field| %>
+          <tbody>
+            <tr>
+              <td><%= field.collection_select :paint_id, @paints, :id, :name, {include_blank: true}, class: 'form-control' %></td>
+              <td><%= field.text_field :lot_number, class: 'form-control'%></td>
+              <%# max値は仮設定 %>
+              <td><%= form.number_field :quantity, min: "0.001", max: "100000", step: "0.001", class: "form-control my-1" %></td>
+              <%= field.hidden_field :department_id, value: @user.department_id %>
+              <%# value値は仮設定。formのwithdraw_atが取得できたらそれにする。%>
+              <%= field.hidden_field :withdraw_at, value: Date.current %>
+            </tr>
+          </tbody>
+        <% end %>
+      <% end %>
+  </table>
+  <div class="actions">
+    <%= form.submit yield(:btn_text), class: "btn btn-primary" %>
+  </div>
+<% end %>
