@@ -1,6 +1,7 @@
 class WithdrawsController < ApplicationController
   before_action :set_user, only: [:index, :new, :create]
   before_action :set_day, only: [:index]
+  before_action :set_withdraw, only: [:edit, :update, :destroy]
 
   def index
     @day = Date.current
@@ -36,11 +37,9 @@ class WithdrawsController < ApplicationController
 
   def edit
     @paints = Paint.all
-    @withdraw = Withdraw.find(params[:id])
   end
 
   def update
-    @withdraw = Withdraw.find(params[:id])
     if @withdraw.update(withdraw_params)
       flash[:success] = "出庫の更新に成功しました。"
       redirect_to withdraws_path(day: @withdraw.withdraw_at)
@@ -48,6 +47,12 @@ class WithdrawsController < ApplicationController
       flash[:danger] = '更新に失敗しました。'
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @withdraw.destroy
+    flash[:success] = "#{@withdraw.paint.name}:#{@withdraw.quantity}kgを削除しました。"
+    redirect_to withdraws_path(day: @withdraw.withdraw_at)
   end
   
   private
@@ -60,4 +65,7 @@ class WithdrawsController < ApplicationController
       params.require(:withdraw).permit(:withdraw_at, :user_id, :paint_id, :lot_number, :quantity)
     end
 
+    def set_withdraw
+      @withdraw = Withdraw.find(params[:id])
+    end
 end
