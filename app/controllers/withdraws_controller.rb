@@ -39,10 +39,25 @@ class WithdrawsController < ApplicationController
     @withdraw = Withdraw.find(params[:id])
   end
 
+  def update
+    @withdraw = Withdraw.find(params[:id])
+    if @withdraw.update(withdraw_params)
+      flash[:success] = "出庫の更新に成功しました。"
+      redirect_to withdraws_path(day: @withdraw.withdraw_at)
+    else
+      flash[:danger] = '更新に失敗しました。'
+      render :edit, status: :unprocessable_entity
+    end
+  end
+  
   private
   
     def withdraws_params
       params.require(:withdraws)
+    end
+
+    def withdraw_params
+      params.require(:withdraw).permit(:withdraw_at, :user_id, :paint_id, :lot_number, :quantity)
     end
 
 end
