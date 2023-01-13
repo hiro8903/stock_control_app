@@ -1,2 +1,29 @@
-<h1>Withdraws#edit</h1>
-<p>Find me in app/views/withdraws/edit.html.erb</p>
+<% provide(:title, "出庫編集") %>
+<% provide(:btn_text, '更新') %>
+
+<div class="text-center">
+  <h1>出庫編集</h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+    <%= form_with model: @withdraw do |form| %>
+
+      <%= form.label :withdraw_at, class: "form-label m-1" %>
+      <%= form.date_field :withdraw_at, value: @withdraw.withdraw_at.to_date, class: 'form-control my-1'%>
+
+      <%= form.label :paint_id, class: "form-label m-1" %>
+      <%= form.collection_select :paint_id, @paints, :id, :name, { selected: @withdraw.paint_id }, class: 'form-control my-1'%>
+
+      <%= form.label :quantity, class: "form-label m-1" %>
+      <%= form.number_field :quantity, min: "0", step: "0.001", value: @withdraw.quantity, class: "form-control my-1" %>
+
+      <%= form.label :lot_number, class: "form-label m-1" %>
+      <%= form.text_field :lot_number, value: @withdraw.lot_number, class: 'form-control my-1'%>
+
+      <div class="d-grid gap-2">
+        <%= form.submit yield(:btn_text), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

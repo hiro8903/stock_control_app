@@ -35,6 +35,8 @@ class WithdrawsController < ApplicationController
   end
 
   def edit
+    @paints = Paint.all
+    @withdraw = Withdraw.find(params[:id])
   end
 
   private
