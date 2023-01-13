@@ -11,14 +11,16 @@ class Form::WithdrawCollection < Form::Base
   def initialize(attributes = [])
     if attributes.present?
       self.collection = attributes.map do |value|
-        Withdraw.new(
-          withdrow_at: value["withdrow_at"],
-          user_id: value["user_id"],
-          department_id: value["department_id"],
-          paint_id: value["paint_id"],
-          lot_number: value["lot_number"],
-          quantity: value["quantity"]
-        )
+        if value["paint_id"].present? && value["quantity"].present?
+          Withdraw.new(
+            withdraw_at: value["withdraw_at"],
+            user_id: value["user_id"],
+            department_id: value["department_id"],
+            paint_id: value["paint_id"],
+            lot_number: value["lot_number"],
+            quantity: value["quantity"]
+          )
+        end
       end
     else
       self.collection = WITHDRAW_NUM.times.map { Withdraw.new }

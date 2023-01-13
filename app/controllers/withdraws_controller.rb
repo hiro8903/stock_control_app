@@ -1,6 +1,7 @@
 class WithdrawsController < ApplicationController
-  before_action :set_user, only: [:new]
+  before_action :set_user, only: [:new, :create]
   def index
+    @withdraws = Withdraw.all
   end
 
   def show
@@ -11,6 +12,30 @@ class WithdrawsController < ApplicationController
     @withdraw_collections = Form::WithdrawCollection.new
   end
 
+  def create
+    @paints = Paint.all
+    @withdraw_collections = Form::WithdrawCollection.new(withdraws_params)
+    @withdraw_collections.collection.delete(nil)
+    withdraws_number = @withdraw_collections.collection.count
+    @withdraw_collections.collection.each do |withdraw|
+      withdraw[:withdraw_at] = params[:form_withdraw_collection][:withdraw_at]
+    end
+    if @withdraw_collections.save
+      flash[:success] = "#{withdraws_number}件、出庫登録しました。"
+      redirect_to withdraws_path
+    else
+      flash[:danger] = "出庫登録に失敗しました。"
+      render new_withdraw_path, status: :unprocessable_entity
+    end
+  end
+
   def edit
   end
+
+  private
+  
+    def withdraws_params
+      params.require(:withdraws)
+    end
+
 end

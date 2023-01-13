@@ -1,4 +1,4 @@
-<%= form_with model: collections, url: new_withdraw_path, local: true do |form| %>
+<%= form_with model: collections, url: withdraws_path, local: true do |form| %>
   <div class="col-3">
     <%= form.label "出庫日", class: "form-label my-1" %><br>
     <%= form.date_field :withdraw_at, value: Date.current, class: "form-control my-1" %>
@@ -18,10 +18,9 @@
               <td><%= field.collection_select :paint_id, @paints, :id, :name, {include_blank: true}, class: 'form-control' %></td>
               <td><%= field.text_field :lot_number, class: 'form-control'%></td>
               <%# max値は仮設定 %>
-              <td><%= form.number_field :quantity, min: "0.001", max: "100000", step: "0.001", class: "form-control my-1" %></td>
+              <td><%= field.number_field :quantity, min: "0.001", max: "100000", step: "0.001", class: "form-control my-1" %></td>
+              <%= field.hidden_field :user_id, value: @user.id %>
               <%= field.hidden_field :department_id, value: @user.department_id %>
-              <%# value値は仮設定。formのwithdraw_atが取得できたらそれにする。%>
-              <%= field.hidden_field :withdraw_at, value: Date.current %>
             </tr>
           </tbody>
         <% end %>
