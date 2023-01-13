@@ -1,7 +1,12 @@
 class WithdrawsController < ApplicationController
-  before_action :set_user, only: [:new, :create]
+  before_action :set_user, only: [:index, :new, :create]
+  before_action :set_day, only: [:index]
+
   def index
-    @withdraws = Withdraw.all
+    @day = Date.current
+    @withdraws = Withdraw.where(department_id: current_user.department.id)
+    # @department_monthly_withdraws = @withdraws.where(withdraw_at: @first_day..@last_day).includes(:paint).order("paints.name ASC") if @withdraw.present? && @user.department_id.present?
+    @department_monthly_withdraws = @withdraws.where(withdraw_at: @first_day..@last_day) if @withdraws.present? && @user.department_id.present?
   end
 
   def show

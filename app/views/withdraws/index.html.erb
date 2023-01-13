@@ -1,2 +1,44 @@
-<h1>Withdraws#index</h1>
-<p>Find me in app/views/withdraws/index.html.erb</p>
+<div class="row justify-content-center text-center">
+  <div class="col-12">
+    <h1><%= @user.department.present? ? "#{@user.department.name}#{@first_day.strftime("%Y年%m月") }の出庫一覧" : "出庫一覧" %></h1>
+    <%= link_to "出庫登録", new_withdraw_path(date: @first_day), class: "btn btn-primary m-1" if @first_day <= Date.current %><br>
+    <%= link_to "⇦ 前月へ", withdraws_path(date: @first_day.prev_month), class: "btn btn-info" %>
+    <%= link_to "今月へ", withdraws_path(date: @day.beginning_of_month), class: "btn btn-warning" %>
+    <%= link_to "次月へ ⇨", withdraws_path(date: @first_day.next_month), class: "btn btn-info" %>
+
+    <h5 class="text-end">*単位：kg</h5>
+    <table id ="fav-table" class="table my-3">
+      <thead>
+        <tr>
+          <th scope="col"><%= Withdraw.human_attribute_name("withdraw_at") %></th>
+          <th scope="col"><%= Withdraw.human_attribute_name("paint_id") %></th>
+          <th scope="col"><%= Withdraw.human_attribute_name("quantity") %></th>
+          <th scope="col"><%= Withdraw.human_attribute_name("lot_number") %></th>
+          <th scope="col"><%= Withdraw.human_attribute_name("user_id") %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% if @department_monthly_withdraws.present? %>
+        <% @department_monthly_withdraws.each do |withdraw| %>
+          <tr class="align-middle">
+            <td><%= withdraw.withdraw_at.strftime("%y/%m/%d") %></td>
+            <td><%= withdraw.paint.name %></td>
+            <td><%= withdraw.quantity %></td>
+            <td><%= withdraw.lot_number %></td>
+            <td><%= withdraw.user.name %></td>
+            <td><%= link_to "編集", edit_withdraw_path(withdraw), class: "btn btn-sm btn-success" %></td>
+            <td><%= link_to "削除", withdraw_path(withdraw), data: {
+                    turbo_method: :delete,
+                      turbo_confirm: "本当に削除しますか？"
+                    }, class: "btn btn-sm btn-danger" %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="6">出庫登録されていません。</td>
+        </tr>
+      <% end %>
+      </tbody>
+    <table>
+  </div>
+</div>
