@@ -1,7 +1,7 @@
 <%= form_with model: collections, url: withdraws_path, local: true do |form| %>
   <div class="col-3">
     <%= form.label "出庫日", class: "form-label my-1" %><br>
-    <%= form.date_field :withdraw_at, value: Date.current, class: "form-control my-1" %>
+    <%= form.date_field :withdraw_at, value: Date.current, max: Date.current, class: "form-control my-1" %>
   </div>
   <table class="table border-0">
     <thead>
