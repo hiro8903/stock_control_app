@@ -26,10 +26,10 @@ class AllInventoriesController < ApplicationController
     @departments = Department.all
     @all_monthly_inventories = AllInventory.where(inventory_at: @first_day)
     @all_inventory_collections = Form::AllInventoryCollection.new(all_monthly_inventories_params)
-    if @all_inventory_collections.save
+    if @all_inventory_collections.save && params[:all_inventories].first["inventory_at"].to_date.end_of_month <= Date.current
       redirect_to all_inventories_url(date: params[:date])
     else
-      params[:all_inventories].first["inventory_at"].to_date > Date.current ? flash[:danger] = "本日より先の日付けの棚卸は確定できません。" : flash[:danger] = "失敗しました。"
+      flash[:danger] = "本日より先の月末棚卸は確定できません。"
       @all_inventory_collections = Form::AllInventoryCollection.new # render時に表が複数発生してしまう不具合を防止するため。
       if params[:all_inventories].first["inventory_at"].to_date > Date.current
         redirect_to all_inventories_url(date: params[:date])

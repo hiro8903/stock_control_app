@@ -2,9 +2,9 @@
   <div class="col-12">
     <h1><%= "#{@first_day.strftime("%Y年%m月")} 棚卸まとめ" %></h1>
     <% unless @all_inventory.present? %>
-      <%= link_to "棚卸登録", new_all_inventory_path(date: @first_day), class: "btn btn-primary m-1" if @first_day <= Date.current %><br>
+      <%= link_to "棚卸登録", new_all_inventory_path(date: @first_day), class: "btn btn-primary m-1" if @first_day < Date.current.beginning_of_month %><br>
     <% else %>
-      <%= link_to "棚卸編集", edit_all_inventory_path(@all_inventory), class: "btn btn-success m-1" if @first_day <= Date.current %>
+      <%= link_to "棚卸編集", edit_all_inventory_path(@all_inventory), class: "btn btn-success m-1" if @first_day < Date.current.beginning_of_month %>
       <%= link_to "削除", all_inventory_path(@all_monthly_inventories, inventory_at: @first_day), data: {turbo_method: :delete,
                                                                     turbo_confirm: "#{@first_day.strftime("%Y年%m月")}の棚卸を削除しますか？"
                                                                     }, class: "btn btn-danger" %></td><br>
