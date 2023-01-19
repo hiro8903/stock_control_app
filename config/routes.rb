@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   resources :inventories
   resources :all_inventories
   resources :withdraws
+  resources :stocks, only: [:index, :show]
 end
