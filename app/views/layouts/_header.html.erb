@@ -18,7 +18,7 @@
               仕入
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><%= link_to "発注入力", new_order_path, class: "dropdown-item" %></li>
+              <li><%= link_to "発注登録", new_order_path, class: "dropdown-item" %></li>
               <li><%= link_to "発注一覧", orders_path, class: "dropdown-item" %></li>
               <li><hr class="dropdown-divider"></li>
               <li><%= link_to "回答一覧", answers_index_path, class: "dropdown-item" %></li>
@@ -43,6 +43,14 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><%= link_to "出庫登録", new_withdraw_path, class: "dropdown-item" %></li>
               <li><%= link_to "出庫一覧", withdraws_path, class: "dropdown-item" %></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              残量
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><%= link_to "残量一覧", stocks_path, class: "dropdown-item" %></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
