@@ -67,4 +67,8 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # ngrokを使用してローカル環境を外部に公開するための設定。
+  # ターミナルで「ngrok http 3000」というコマンドを実行後、都度 Forwarding の「https://…」の…部分をセットする。
+  config.hosts << "9687-240b-c010-465-6555-f151-131e-f845-8dee.ngrok-free.app"
 end
