@@ -1,0 +1,2 @@
+class LineLoginApiController < ApplicationController
+end
