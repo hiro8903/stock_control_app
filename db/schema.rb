@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_11_145140) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_21_103018) do
   create_table "all_inventories", force: :cascade do |t|
     t.integer "paint_id", null: false
     t.date "inventory_at", null: false
@@ -126,6 +126,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_145140) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.integer "department_id"
+    t.string "line_user_id"
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 
