@@ -4,15 +4,17 @@ Rails.application.routes.draw do
   get 'answers/show'
   get 'answers/new'
   get 'answers/edit'
-  root 'sessions#new'
-
-  # ログイン機能
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  # root 'sessions#new'
+  root 'sessions#before_login'
 
   # LINEログイン
   get 'line_login_api/login', to: 'line_login_api#login'
   get 'line_login_api/callback', to: 'line_login_api#callback'
+  
+  # ログイン機能
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
 
   resources :users
   resources :departments

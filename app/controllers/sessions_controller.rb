@@ -21,5 +21,11 @@ class SessionsController < ApplicationController
     flash[:success] = 'ログアウトしました。'
     redirect_to root_url, status: :see_other  # ステータスコード303 See Otherでrootパスにリダイレクトします。
   end
+
+  def before_login    
+  end
+  
+  def after_login    
+  end
   
 end
