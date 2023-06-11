@@ -70,5 +70,5 @@ Rails.application.configure do
 
   # ngrokを使用してローカル環境を外部に公開するための設定。
   # ターミナルで「ngrok http 3000」というコマンドを実行後、都度 Forwarding の「https://…」の…部分をセットする。
-  config.hosts << "abe0-240b-c010-4d2-c5a3-6049-e7f7-106d-ddcd.ngrok-free.app"
+  Rails.application.config.hosts << ENV['NGLOK_URL']
 end

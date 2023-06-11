@@ -6,7 +6,7 @@ ruby "3.1.2"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3", ">= 7.0.3.1"
 
-gem 'dotenv' # 環境変数を扱うために必要。
+gem 'dotenv-rails', groups: [:development, :test] # 環境変数を扱うために必要。
 gem 'typhoeus' # get_line_user_id_token get_line_user_idメソッド内のHTTP通信で使う。
 gem 'faker' # サンプルユーザーを作成する。
 gem "cssbundling-rails"

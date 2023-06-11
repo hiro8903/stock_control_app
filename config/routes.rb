@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get 'answers/edit'
   # root 'sessions#new'
   root 'sessions#before_login'
-
+  get '/after_login', to: 'sessions#after_login'
+  
   # LINEログイン
   get 'line_login_api/login', to: 'line_login_api#login'
   get 'line_login_api/callback', to: 'line_login_api#callback'
