@@ -33,7 +33,7 @@ class LineLoginApiController < ApplicationController
       if user.save
         session[:user_id] = user.id
         flash[:success] = 'ログインしました。'
-        redirect_to after_login_path
+        redirect_to user_path(user)
       elsif # 初回LINEログイン時は部署とパスワードが登録されていないので、仮登録してログインする
         user[:department_id] = 1
         user[:password_digest] = 1234

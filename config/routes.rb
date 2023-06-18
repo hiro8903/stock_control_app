@@ -4,10 +4,8 @@ Rails.application.routes.draw do
   get 'answers/show'
   get 'answers/new'
   get 'answers/edit'
-  # root 'sessions#new'
-  root 'sessions#before_login'
-  get '/after_login', to: 'sessions#after_login'
-  
+  root 'sessions#new'
+
   # LINEログイン
   get 'line_login_api/login', to: 'line_login_api#login'
   get 'line_login_api/callback', to: 'line_login_api#callback'

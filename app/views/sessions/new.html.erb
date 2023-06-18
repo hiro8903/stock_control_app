@@ -16,8 +16,8 @@
       
       <div class="d-grid gap-2">
         <%= form.submit "ログイン", class: "btn btn-primary" %>
+        <%= link_to "LINEでログイン", line_login_api_login_path, class: "btn btn-line" %>
       </div>
     <% end %>
   </div>
-    <%= link_to "LINEでログイン", line_login_api_login_path, class: "btn" %>
 </div>
