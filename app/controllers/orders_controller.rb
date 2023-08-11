@@ -13,28 +13,28 @@ class OrdersController < ApplicationController
 
   def new
     @last_order = Order.all.order(updated_at: :desc).first
-    @order = Order.new
+    @order_collections = Form::OrderCollection.new
   end
 
   def create
-    @order = Order.new(order_params)
-    @orders = Order.all
-    if @order.save
-      if @order.unit_price.present?
-        @order.total_price = @order.unit_price * @order.quantity
-      else
-        @order.unit_price = @order.paint.unit_price
-        @order.total_price = @order.unit_price * @order.quantity
-      end
-      @order.save
-      flash[:success] = '発注登録しました。'
-      
+    @users = User.all
+    @paints = Paint.all
+    @order_collections = Form::OrderCollection.new(orders_params)
+    @order_collections.collection.delete(nil)
+    orders_number = @order_collections.collection.count
+    @order_collections.collection.each do |order|
+      order[:user_id] = params[:form_order_collection][:user_id]
+      order[:order_on] = params[:form_order_collection][:order_on]
+      order[:desired_on] = params[:form_order_collection][:desired_on]
+      order[:registerer_id] = @user.id if order.created_at == order.updated_at
+      order[:editor_id] = @user.id
+    end
+    if @order_collections.save
+      flash[:success] = "#{orders_number}件、発注登録しました。"
       redirect_to orders_path
     else
-      # @users,@paintsが設定されていないと保存失敗時にrenderした際、それぞれがnilになりエラーになる。
-      @users = User.all
-      @paints = Paint.order(:discontinue).order(:name)
-      render :new, status: :unprocessable_entity
+      flash[:danger] = "発注登録に失敗しました。"
+      render new_order_path, status: :unprocessable_entity
     end
   end
   
@@ -65,6 +65,11 @@ class OrdersController < ApplicationController
   
 
   private
+
+    def orders_params
+      params.require(:orders)
+    end
+
     def order_params
       params.require(:order).permit(:paint_id, :user_id, :order_on, :quantity, :desired_on,
                                     :note, :registerer_id, :editor_id, :unit_price, :total_price)
